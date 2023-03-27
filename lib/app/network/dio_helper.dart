@@ -124,109 +124,65 @@ class DioHelper {
     }
   }
 
-  // Future<dynamic> onRequestFormData({
-  //   /// A file to be uploaded as part of a [MultipartRequest]. This doesn't need to
-  //   /// correspond to a physical file.
-  //   ///
-  //   /// MultipartFile is based on stream, and a stream can be read only once,
-  //   /// so the same MultipartFile can't be read multiple times.
-  //   String? endPoint,
-  //   required Map<String, dynamic> formData,
-  //   bool? isAuthorize = false,
-  //   bool isDebugOn = false,
-  //   bool showBodyInput = false,
-  // }) async {
-  //   if (isDebugOn) {
-  //     log('Token:$_token');
-  //   }
-  //   Map<String, String> header = {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': isAuthorize!
-  //         ? _token != ''
-  //             ? '$_token'
-  //             : '$_session'
-  //         : ""
-  //   };
+//   Future<dynamic> onRequestFormData({
+//     /// A file to be uploaded as part of a [MultipartRequest]. This doesn't need to
+//     /// correspond to a physical file.
+//     ///
+//     /// MultipartFile is based on stream, and a stream can be read only once,
+//     /// so the same MultipartFile can't be read multiple times.
+//     String? endPoint,
+//     required Map<String, dynamic> formData,
+//     bool? isAuthorize = false,
+//     bool isDebugOn = false,
+//     bool showBodyInput = false,
+//   }) async {
+//     if (isDebugOn) {
+//       log('Token:$_token');
+//     }
+//     Map<String, String> header = {
+//       'Content-Type': 'application/json',
+//       'Authorization': isAuthorize!
+//           ? _token != ''
+//               ? '$_token'
+//               : '$_session'
+//           : ""
+//     };
 
-  //   try {
-  //     var dio = Dio();
-  //     var fullUrl = _baseUrl + endPoint.toString();
-  //     if (isDebugOn) {
-  //       log('FullUrl:$fullUrl');
-  //     }
+//     try {
+//       var dio = Dio();
+//       var fullUrl = _baseUrl + endPoint.toString();
+//       if (isDebugOn) {
+//         log('FullUrl:$fullUrl');
+//       }
 
-  //     var data = FormData.fromMap(formData);
-  //     if (showBodyInput) {
-  //       log('BodyInputDebug:${data.files}');
-  //     }
-  //     Response response = await dio.post(fullUrl,
-  //         data: data,
-  //         options: Options(
-  //           headers: header,
-  //         ));
+//       var data = FormData.fromMap(formData);
+//       if (showBodyInput) {
+//         log('BodyInputDebug:${data.files}');
+//       }
+//       Response response = await dio.post(fullUrl,
+//           data: data,
+//           options: Options(
+//             headers: header,
+//           ));
 
-  //     var lastResponse = await _returnResponse(response);
-  //     if (isDebugOn) {
-  //       log("200=====${lastResponse.toString()}");
-  //     }
-  //     return lastResponse;
-  //   } on DioError catch (e) {
-  //     if (isDebugOn) {
-  //       log('DioError:${e.message}');
-  //       log('DioError:${e.error}');
-  //       log('DioError:${e.stackTrace}');
-  //       log('DioError:${e.response}');
-  //       log('DioError:${e.type}');
-  //     }
-  //     if (e.response != null) {
-  //       return await _returnResponse(e.response!);
-  //     }
-  //   }
-  // }
-
-  dynamic _returnResponse(Response response) async {
-    switch (response.statusCode) {
-      case 200:
-        return response.data;
-      case 201:
-        return response.data;
-      case 202:
-        return response.data;
-      case 302:
-        return response.data;
-      case 400:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode, bodyString: response.data));
-      case 401:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode, bodyString: response.data));
-      case 404:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode, bodyString: response.data));
-      case 403:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode, bodyString: response.data));
-      case 500:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode, bodyString: response.data));
-
-      default:
-        return Future.error(ErrorModel(
-            statusCode: response.statusCode,
-            bodyString: response.data ?? 'Error'));
-    }
-  }
-}
-
-class ErrorModel {
-  final int? statusCode;
-  final dynamic bodyString;
-  final String? message;
-  const ErrorModel({
-    this.statusCode,
-    this.bodyString,
-    this.message,
-  });
+//       var lastResponse = await _returnResponse(response);
+//       if (isDebugOn) {
+//         log("200=====${lastResponse.toString()}");
+//       }
+//       return lastResponse;
+//     } on DioError catch (e) {
+//       if (isDebugOn) {
+//         log('DioError:${e.message}');
+//         log('DioError:${e.error}');
+//         log('DioError:${e.stackTrace}');
+//         log('DioError:${e.response}');
+//         log('DioError:${e.type}');
+//       }
+//       if (e.response != null) {
+//         return await _returnResponse(e.response!);
+//       }
+//     }
+//   }
 }
 
 enum METHODE {
