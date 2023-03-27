@@ -1,9 +1,10 @@
+import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:malispos/main.dart';
-import 'package:malispos/module/sales/view/sale_view.dart';
+import 'package:malispos/app/module/home/view/home_screen.dart';
+import 'package:malispos/app/module/sales/view/sale_view.dart';
 
-import '../core/splash_screen/splash_screen.dart';
+import '../app/module/splash_screen/splash_screen.dart';
 
 class AppRoute {
   static final GoRouter router = GoRouter(
@@ -22,14 +23,26 @@ class AppRoute {
           builder: (context, state) => SplashScreen(key: state.pageKey),
           routes: const []),
       GoRoute(
-          path: "/dashboard",
-          builder: (context, state) => MyHomePage(key: state.pageKey),
-          routes: [
-            GoRoute(
-              path: "sale",
-              builder: (context, state) => SaleView(key: state.pageKey),
-            )
-          ]),
+        path: "/dashboard",
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: HomeScreen(key: state.pageKey),
+          transitionDuration: const Duration(milliseconds: 600),
+          // reverseTransitionDuration: const Duration(milliseconds: 1500),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              CircularRevealAnimation(
+            animation: animation,
+            child: child,
+          ),
+        ),
+        builder: (context, state) => HomeScreen(key: state.pageKey),
+        routes: [
+          GoRoute(
+            path: "sale",
+            builder: (context, state) => SaleView(key: state.pageKey),
+          )
+        ],
+      ),
     ],
   );
 }
