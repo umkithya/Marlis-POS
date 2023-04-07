@@ -43,6 +43,7 @@ dependencies:
   circular_reveal_animation: ^2.0.1
   shared_preferences: ^2.0.20
   dio: ^5.1.0
+  flutter_svg: ^2.0.4
   
 
 

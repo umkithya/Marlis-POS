@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // navigating to home screen
     // Navigator.pushNamed(context, '/');
     if (context.mounted) {
-      context.go("/dashboard");
+      context.go("/home");
     }
   }
 
