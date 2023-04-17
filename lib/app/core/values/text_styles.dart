@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import '/app/core/values/app_colors.dart';
 
 var lightThemeData = ThemeData(
-  cardColor: AppColors.colorPrimary,
-  primaryColor: AppColors.colorPrimary,
+  cardColor: appColors.colorPrimary.value,
+  primaryColor: appColors.colorPrimary.value,
   dividerColor: AppColors.colorDevider,
   primaryTextTheme: TextTheme(
     //Label
-
     labelLarge: const TextStyle(
         fontSize: 16,
         color: AppColors.colorTextBlack,
@@ -46,31 +45,31 @@ var lightThemeData = ThemeData(
 
     displayLarge: TextStyle(color: Colors.blueGrey[800]),
   ),
-  iconTheme: const IconThemeData(color: Colors.blueGrey),
+  iconTheme: const IconThemeData(color: Colors.white),
   brightness: Brightness.light,
 );
 
-var darkThemeData = ThemeData(
-  cardColor: const Color.fromARGB(255, 36, 35, 35),
-  primaryTextTheme: TextTheme(
-    labelLarge: TextStyle(
-      color: Colors.blueGrey[200],
-      decorationColor: Colors.blueGrey[50],
-    ),
-    titleSmall: const TextStyle(
-      color: Colors.white,
-    ),
-    titleMedium: TextStyle(
-      color: Colors.blueGrey[300],
-    ),
-    displayLarge: const TextStyle(
-      color: Colors.white70,
-    ),
-  ),
-  iconTheme: IconThemeData(color: Colors.blueGrey[200]),
-  brightness: Brightness.dark,
-  bottomAppBarTheme:
-      const BottomAppBarTheme(color: Color.fromARGB(255, 57, 57, 57)),
-  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey)
-      .copyWith(background: const Color.fromARGB(255, 58, 77, 86)),
-);
+// var darkThemeData = ThemeData(
+//   cardColor: const Color.fromARGB(255, 36, 35, 35),
+//   primaryTextTheme: TextTheme(
+//     labelLarge: TextStyle(
+//       color: Colors.blueGrey[200],
+//       decorationColor: Colors.blueGrey[50],
+//     ),
+//     titleSmall: const TextStyle(
+//       color: Colors.white,
+//     ),
+//     titleMedium: TextStyle(
+//       color: Colors.blueGrey[300],
+//     ),
+//     displayLarge: const TextStyle(
+//       color: Colors.white70,
+//     ),
+//   ),
+//   iconTheme: const IconThemeData(color: Colors.white),
+//   brightness: Brightness.light,
+//   // bottomAppBarTheme:
+//   //     const BottomAppBarTheme(color: Color.fromARGB(255, 57, 57, 57)),
+//   // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey)
+//   //     .copyWith(background: const Color.fromARGB(255, 58, 77, 86)),
+// );

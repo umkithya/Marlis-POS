@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/values/app_colors.dart';
+
 class PandaBarButton extends StatefulWidget {
   final String svgImage;
   final String title;
@@ -56,9 +58,9 @@ class _PandaBarButtonState extends State<PandaBarButton>
         onTap: widget.onTap as void Function(),
         onHighlightChanged: (touched) {
           if (!touched) {
-            animationController.forward().whenCompleteOrCancel(() {
-              animationController.reset();
-            });
+            // animationController.forward().whenCompleteOrCancel(() {
+            //   animationController.reset();
+            // });
           }
         },
         child: Column(
@@ -67,15 +69,17 @@ class _PandaBarButtonState extends State<PandaBarButton>
           children: [
             SvgPicture.asset(widget.svgImage,
                 color: widget.isSelected
-                    ? (widget.selectedColor ?? const Color(0xFF078DF0))
-                    : (widget.unselectedColor ?? const Color(0xFF9FACBE))),
+                    ? (widget.selectedColor ??
+                        const Color.fromARGB(255, 248, 248, 248))
+                    : (widget.unselectedColor ?? AppColors.colorUnselect)),
             Container(
               height: animation.value,
             ),
             Text(widget.title,
                 style: TextStyle(
                     color: widget.isSelected
-                        ? (widget.selectedColor ?? const Color(0xFF078DF0))
+                        ? (widget.selectedColor ??
+                            const Color.fromARGB(255, 255, 255, 255))
                         : (widget.unselectedColor ?? const Color(0xFF9FACBE)),
                     fontWeight: FontWeight.bold,
                     fontSize: 10))

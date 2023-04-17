@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/values/app_colors.dart';
 import 'button.view.dart';
@@ -48,65 +49,73 @@ class _PandaBarState extends State<PandaBar> {
   Widget build(BuildContext context) {
     final clipper = _PandaBarClipper(fabSize: fabSize);
 
-    return CustomPaint(
-      painter: _ClipShadowPainter(
-        shadow: const Shadow(
-            color: Colors.grey, blurRadius: 10, offset: Offset(0, -3)),
-        clipper: clipper,
-      ),
-      child: ClipPath(
-        clipper: clipper,
-        child: Container(
-          height: 70,
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          color: widget.backgroundColor ?? AppColors.colorPrimary,
-          child: Builder(builder: (context) {
-            List<Widget> leadingChildren = [];
-            List<Widget> trailingChildren = [];
+    return Transform.translate(
+      offset: const Offset(0, 3),
+      child: CustomPaint(
+        painter: _ClipShadowPainter(
+          shadow: Shadow(
+              color: appColors.colorPrimary.value,
+              blurRadius: 1,
+              offset: const Offset(0, -1)),
+          clipper: clipper,
+        ),
+        child: ClipPath(
+          clipper: clipper,
+          child: Obx(
+            () => Container(
+              // margin: const EdgeInsets.only(bottom: 1),
+              // height: 70,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              color: widget.backgroundColor ?? appColors.colorPrimary.value,
+              child: Builder(builder: (context) {
+                List<Widget> leadingChildren = [];
+                List<Widget> trailingChildren = [];
 
-            widget.buttonData.asMap().forEach((i, data) {
-              Widget btn = PandaBarButton(
-                svgImage: data.svgimage,
-                title: data.title,
-                isSelected: data.id != null && selectedId == data.id,
-                unselectedColor: widget.buttonColor,
-                selectedColor: widget.buttonSelectedColor,
-                onTap: () {
-                  setState(() {
-                    selectedId = data.id;
-                  });
-                  widget.onChange(data.id);
-                },
-              );
+                widget.buttonData.asMap().forEach((i, data) {
+                  Widget btn = PandaBarButton(
+                    svgImage: data.svgimage,
+                    title: data.title,
+                    isSelected: data.id != null && selectedId == data.id,
+                    unselectedColor: widget.buttonColor,
+                    selectedColor: widget.buttonSelectedColor,
+                    onTap: () {
+                      setState(() {
+                        selectedId = data.id;
+                      });
+                      widget.onChange(data.id);
+                    },
+                  );
 
-              if (i < 2) {
-                leadingChildren.add(btn);
-              } else {
-                trailingChildren.add(btn);
-              }
-            });
+                  if (i < 2) {
+                    leadingChildren.add(btn);
+                  } else {
+                    trailingChildren.add(btn);
+                  }
+                });
 
-            return Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: leadingChildren,
-                  ),
-                ),
-                Container(
-                  width: fabSize,
-                  // color: Colors.pink,
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: trailingChildren,
-                  ),
-                ),
-              ],
-            );
-          }),
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: leadingChildren,
+                      ),
+                    ),
+                    Container(
+                      width: fabSize,
+                      // color: Colors.pink,
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: trailingChildren,
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ),
+          ),
         ),
       ),
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/values/app_colors.dart';
+
 class PandaBarFabButton extends StatefulWidget {
   final double size;
   final VoidCallback? onTap;
@@ -56,13 +58,17 @@ class _PandaBarFabButtonState extends State<PandaBarFabButton> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(widget.svgimage!),
+            SvgPicture.asset(
+              widget.svgimage!,
+              color: _touched ? Colors.white : AppColors.colorUnselect,
+            ),
             const SizedBox(
               height: 3,
             ),
             Text(
               "Sales",
-              style: Theme.of(context).primaryTextTheme.bodySmall,
+              style: Theme.of(context).primaryTextTheme.bodySmall!.copyWith(
+                  color: _touched ? Colors.white : AppColors.colorUnselect),
             )
           ],
         ),
