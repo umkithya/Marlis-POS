@@ -4,9 +4,9 @@ import 'package:malispos/app/module/notification/view/notification.dart';
 import 'package:malispos/app/module/product/view/product.dart';
 import 'package:malispos/app/module/reports/view/reports.dart';
 
-import '../app/module/bottom_naivigaton/view/bottom_navition.dart';
-import '../app/module/home/view/home_screen.dart';
-import '../app/module/splash_screen/splash_screen.dart';
+import '../module/bottom_naivigaton/view/bottom_navition.dart';
+import '../module/home/view/home_screen.dart';
+import '../module/splash_screen/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'shell');

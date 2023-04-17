@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852924809459",
+    "project_id": "malispos",
+    "storage_bucket": "malispos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852924809459:android:1a8cece8d02b4057673786",
+        "android_client_info": {
+          "package_name": "com.example.malispos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852924809459-0kji15gto0dq0dsc3vfhvg7nc27jgpl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRlzo3qS1BamKoe27vAtSWe_gR6RYm4gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852924809459-0kji15gto0dq0dsc3vfhvg7nc27jgpl6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
