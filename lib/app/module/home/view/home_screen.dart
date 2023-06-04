@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/home/controller/home_controller.dart';
 
 import '../../../core/values/app_colors.dart';
@@ -45,7 +46,11 @@ class HomeScreen extends StatelessWidget {
           ],
           elevation: 0,
         ),
-        body: Container(child: const Text("home")),
+        body: Container(child: GestureDetector(
+          onTap: (){
+            context.push("/home/productsdetail");
+          },
+          child: const Text("home"))),
       ),
     );
   }

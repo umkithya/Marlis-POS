@@ -8,19 +8,15 @@ class SaleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SaleController>(
-      init: SaleController(),
-      builder: (controller) => Scaffold(
-        appBar: AppBar(
-          title: const Text("Sale Screen"),
-        ),
-        body: Center(child: Text(controller.count.toString())),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => controller.increase(),
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
-      ),
-    );
+    return SaleController.instance.obx(
+        (state) => Scaffold(
+              appBar: AppBar(
+                title: const Text("Sale Screen"),
+              ),
+              body: Center(child: Text(state!.id.toString())),
+            ),
+        onEmpty: const Text("data is empty"),
+        onLoading: const Text("data is loading"),
+        onError: (e) => const Text("data is error"));
   }
 }

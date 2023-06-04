@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:malispos/app/module/bottom_naivigaton/view/widget/main_view.dart';
+import 'package:malispos/app/module/bottom_naivigaton/view/widget/custom_drawer.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
-import 'widget/custom_drawer.dart';
-import 'widget/fab-button.view.dart';
+import 'widget/custom_itembar.dart';
+import 'widget/itembar_model.dart';
 
 final advancedDrawerController = AdvancedDrawerController();
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key, this.child});
   final Widget? child;
-  final String home = "home";
-  final String product = 'product';
-  final String reposrts = 'reports';
-  final String notification = 'notification';
 
   @override
   Widget build(BuildContext context) {
@@ -38,72 +36,62 @@ class BottomNavigation extends StatelessWidget {
           ),
           child: Scaffold(
             // key: scaffoldKey,
-            body: Stack(
-              children: [
-                child!,
-                Positioned(
-                  bottom: 35,
-                  left: Get.width / 2 - 40,
-                  child: PandaBarFabButton(
-                    size: 70,
-                    svgimage: 'assets/add order.svg',
-                    onTap: () {},
-                    colors: [
-                      appColors.colorPrimary.value,
-                      appColors.colorPrimary.value,
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: PandaBar(
-                    buttonData: [
-                      PandaBarButtonData(
-                        id: BottomName.home,
-                        svgimage: 'assets/home.svg',
-                        title: 'Home',
-                      ),
-                      PandaBarButtonData(
-                          id: BottomName.product,
-                          svgimage: 'assets/product.svg',
-                          title: 'Products'),
-                      PandaBarButtonData(
-                          id: BottomName.reports,
-                          svgimage: 'assets/report.svg',
-                          title: 'Reports'),
-                      PandaBarButtonData(
-                          id: BottomName.notificaiton,
-                          svgimage: 'assets/notificaiton.svg',
-                          title: 'Notifications'),
-                    ],
-                    onChange: (id) {
-                      debugPrint(
-                          "onchange idss $id . ${BottomName.product.name}");
-                      switch (id) {
-                        case BottomName.home:
-                          debugPrint("onchange id $id");
-                          _onItemTapped(0, context);
-                          break;
-                        case BottomName.product:
-                          debugPrint("onchange id $id");
-                          _onItemTapped(1, context);
-                          break;
-                        case BottomName.reports:
-                          _onItemTapped(2, context);
-                          break;
-                        case BottomName.notificaiton:
-                          _onItemTapped(3, context);
-                          break;
-                      }
-                    },
-                    onFabButtonPressed: () {
-                      debugPrint("onfabbuttnon ");
-                    },
-                  ),
-                )
-              ],
+
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.miniCenterDocked,
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Theme.of(context).primaryColor,
+              onPressed: () {
+                GoRouter.of(context).go('/sales');
+                // GoRouterState.of(context).location.startsWith("/sales");
+              },
+              shape: const CircleBorder(),
+              child: SvgPicture.asset(
+                Assets.addOrder,
+                color: GoRouterState.of(context).location == "/sales"
+                    ? AppColors.pageBackground
+                    : AppColors.colorUnselect,
+              ),
+            ),
+            body: child!,
+            bottomNavigationBar: BottomAppBar(
+              // ****** APP BAR ******************
+              color: Theme.of(context).primaryColor,
+              clipBehavior: Clip.antiAlias,
+              shape: const CircularNotchedRectangle(),
+              notchMargin: 6,
+              padding: const EdgeInsets.all(0),
+              shadowColor: Colors.transparent,
+              elevation: 10,
+              height: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...listItem
+                      .asMap()
+                      .entries
+                      .map((e) => Padding(
+                            padding: EdgeInsets.only(
+                                left: e.key == 2 ? 30 : 0,
+                                right: e.key == 1 ? 30 : 0),
+                            child: ItemBar(
+                              activeAssetPath: e.value.activeImagePath!,
+                              onTap: () {
+                                // Get.put(BottomNavigationBarController())
+                                //     .currentIndex
+                                //     .value = e.key;
+                                _onItemTapped(e.key, context);
+                              },
+                              currentIndex: e.key,
+                              onTapIndex: _calculateSelectedIndex(context),
+                              assetPath: e.value.imagePath!,
+                              label: e.value.label!,
+                            ),
+                          ))
+                      .toList()
+                ],
+              ),
             ),
           ),
         ),
@@ -111,6 +99,29 @@ class BottomNavigation extends StatelessWidget {
     );
   }
 }
+
+final listItem = <ItemModel>[
+  ItemModel(
+    imagePath: Assets.home,
+    activeImagePath: Assets.home,
+    label: "Home",
+  ),
+  ItemModel(
+    imagePath: Assets.product,
+    activeImagePath: Assets.product,
+    label: "Products",
+  ),
+  ItemModel(
+    imagePath: Assets.report,
+    activeImagePath: Assets.report,
+    label: "Reports",
+  ),
+  ItemModel(
+    imagePath: Assets.notificaiton,
+    activeImagePath: Assets.notificaiton,
+    label: "Notificaiton",
+  ),
+];
 
 enum BottomName { home, product, reports, notificaiton }
 
@@ -129,7 +140,7 @@ int _calculateSelectedIndex(BuildContext context) {
   if (location.startsWith('/notifications')) {
     return 3;
   }
-  return 0;
+  return 4;
 }
 
 void _onItemTapped(int index, BuildContext context) {
