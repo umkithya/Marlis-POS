@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/bottom_naivigaton/view/widget/custom_drawer.dart';
 
@@ -47,7 +46,7 @@ class BottomNavigation extends StatelessWidget {
               },
               shape: const CircleBorder(),
               child: SvgPicture.asset(
-                Assets.addOrder,
+                Assets.images.addOrder,
                 color: GoRouterState.of(context).location == "/sales"
                     ? AppColors.pageBackground
                     : AppColors.colorUnselect,
@@ -102,23 +101,23 @@ class BottomNavigation extends StatelessWidget {
 
 final listItem = <ItemModel>[
   ItemModel(
-    imagePath: Assets.home,
-    activeImagePath: Assets.home,
+    imagePath: Assets.images.home,
+    activeImagePath: Assets.images.home,
     label: "Home",
   ),
   ItemModel(
-    imagePath: Assets.product,
-    activeImagePath: Assets.product,
+    imagePath: Assets.images.product,
+    activeImagePath: Assets.images.product,
     label: "Products",
   ),
   ItemModel(
-    imagePath: Assets.report,
-    activeImagePath: Assets.report,
+    imagePath: Assets.images.report,
+    activeImagePath: Assets.images.report,
     label: "Reports",
   ),
   ItemModel(
-    imagePath: Assets.notificaiton,
-    activeImagePath: Assets.notificaiton,
+    imagePath: Assets.images.notificaiton,
+    activeImagePath: Assets.images.notificaiton,
     label: "Notificaiton",
   ),
 ];

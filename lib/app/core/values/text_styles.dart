@@ -7,6 +7,21 @@ var lightThemeData = ThemeData(
   primaryColor: appColors.colorPrimary.value,
   dividerColor: AppColors.colorDevider,
   primaryTextTheme: TextTheme(
+    headlineLarge: const TextStyle(
+        fontSize: 16,
+        color: AppColors.colorTextBlack,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.bold),
+    headlineMedium: const TextStyle(
+        fontSize: 14,
+        color: AppColors.colorTextBlack,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.bold),
+    headlineSmall: const TextStyle(
+        fontSize: 12,
+        color: AppColors.colorTextBlack,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600),
     //Label
     labelLarge: const TextStyle(
         fontSize: 16,

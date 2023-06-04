@@ -9,21 +9,42 @@
 
 import 'package:flutter/widgets.dart';
 
-class Assets {
-  Assets._();
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
 
-  static const String addOrder = 'assets/add order.svg';
-  static const String cart = 'assets/cart.svg';
-  static const String ganzberg = 'assets/ganzberg.svg';
-  static const String home = 'assets/home.svg';
-  static const AssetGenImage malisPosLogo =
-      AssetGenImage('assets/malis-pos-logo.png');
-  static const String menu = 'assets/menu.svg';
-  static const String nikeAnimation = 'assets/nike_animation.mp4';
-  static const String notificaiton = 'assets/notificaiton.svg';
-  static const String product = 'assets/product.svg';
-  static const String report = 'assets/report.svg';
-  static const String splashAnimated = 'assets/splash-animated.mp4';
+  /// File path: assets/images/add order.svg
+  String get addOrder => 'assets/images/add order.svg';
+
+  /// File path: assets/images/cart.svg
+  String get cart => 'assets/images/cart.svg';
+
+  /// File path: assets/images/ganzberg.svg
+  String get ganzberg => 'assets/images/ganzberg.svg';
+
+  /// File path: assets/images/home.svg
+  String get home => 'assets/images/home.svg';
+
+  /// File path: assets/images/malis-pos-logo.png
+  AssetGenImage get malisPosLogo =>
+      const AssetGenImage('assets/images/malis-pos-logo.png');
+
+  /// File path: assets/images/menu.svg
+  String get menu => 'assets/images/menu.svg';
+
+  /// File path: assets/images/nike_animation.mp4
+  String get nikeAnimation => 'assets/images/nike_animation.mp4';
+
+  /// File path: assets/images/notificaiton.svg
+  String get notificaiton => 'assets/images/notificaiton.svg';
+
+  /// File path: assets/images/product.svg
+  String get product => 'assets/images/product.svg';
+
+  /// File path: assets/images/report.svg
+  String get report => 'assets/images/report.svg';
+
+  $AssetsImagesSalePngGen get salePng => const $AssetsImagesSalePngGen();
+  $AssetsImagesSaleSvgGen get saleSvg => const $AssetsImagesSaleSvgGen();
 
   /// List of all assets
   List<dynamic> get values => [
@@ -36,9 +57,58 @@ class Assets {
         nikeAnimation,
         notificaiton,
         product,
-        report,
-        splashAnimated
+        report
       ];
+}
+
+class $AssetsImagesSalePngGen {
+  const $AssetsImagesSalePngGen();
+
+  /// File path: assets/images/sale_png/coca.png
+  AssetGenImage get coca =>
+      const AssetGenImage('assets/images/sale_png/coca.png');
+
+  /// File path: assets/images/sale_png/hotdog.png
+  AssetGenImage get hotdog =>
+      const AssetGenImage('assets/images/sale_png/hotdog.png');
+
+  /// File path: assets/images/sale_png/melon.png
+  AssetGenImage get melon =>
+      const AssetGenImage('assets/images/sale_png/melon.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [coca, hotdog, melon];
+}
+
+class $AssetsImagesSaleSvgGen {
+  const $AssetsImagesSaleSvgGen();
+
+  /// File path: assets/images/sale_svg/downicon.svg
+  String get downicon => 'assets/images/sale_svg/downicon.svg';
+
+  /// File path: assets/images/sale_svg/filter.svg
+  String get filter => 'assets/images/sale_svg/filter.svg';
+
+  /// File path: assets/images/sale_svg/scan.svg
+  String get scan => 'assets/images/sale_svg/scan.svg';
+
+  /// File path: assets/images/sale_svg/search.svg
+  String get search => 'assets/images/sale_svg/search.svg';
+
+  /// File path: assets/images/sale_svg/uparrow.svg
+  String get uparrow => 'assets/images/sale_svg/uparrow.svg';
+
+  /// File path: assets/images/sale_svg/upicon.svg
+  String get upicon => 'assets/images/sale_svg/upicon.svg';
+
+  /// List of all assets
+  List<String> get values => [downicon, filter, scan, search, uparrow, upicon];
+}
+
+class Assets {
+  Assets._();
+
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
