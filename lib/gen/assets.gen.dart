@@ -40,11 +40,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/product.svg
   String get product => 'assets/images/product.svg';
 
+  $AssetsImagesProductPngGen get productPng =>
+      const $AssetsImagesProductPngGen();
+  $AssetsImagesProductSvgGen get productSvg =>
+      const $AssetsImagesProductSvgGen();
+
   /// File path: assets/images/report.svg
   String get report => 'assets/images/report.svg';
-
-  $AssetsImagesSalePngGen get salePng => const $AssetsImagesSalePngGen();
-  $AssetsImagesSaleSvgGen get saleSvg => const $AssetsImagesSaleSvgGen();
 
   /// List of all assets
   List<dynamic> get values => [
@@ -61,45 +63,45 @@ class $AssetsImagesGen {
       ];
 }
 
-class $AssetsImagesSalePngGen {
-  const $AssetsImagesSalePngGen();
+class $AssetsImagesProductPngGen {
+  const $AssetsImagesProductPngGen();
 
-  /// File path: assets/images/sale_png/coca.png
+  /// File path: assets/images/product_png/coca.png
   AssetGenImage get coca =>
-      const AssetGenImage('assets/images/sale_png/coca.png');
+      const AssetGenImage('assets/images/product_png/coca.png');
 
-  /// File path: assets/images/sale_png/hotdog.png
+  /// File path: assets/images/product_png/hotdog.png
   AssetGenImage get hotdog =>
-      const AssetGenImage('assets/images/sale_png/hotdog.png');
+      const AssetGenImage('assets/images/product_png/hotdog.png');
 
-  /// File path: assets/images/sale_png/melon.png
+  /// File path: assets/images/product_png/melon.png
   AssetGenImage get melon =>
-      const AssetGenImage('assets/images/sale_png/melon.png');
+      const AssetGenImage('assets/images/product_png/melon.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [coca, hotdog, melon];
 }
 
-class $AssetsImagesSaleSvgGen {
-  const $AssetsImagesSaleSvgGen();
+class $AssetsImagesProductSvgGen {
+  const $AssetsImagesProductSvgGen();
 
-  /// File path: assets/images/sale_svg/downicon.svg
-  String get downicon => 'assets/images/sale_svg/downicon.svg';
+  /// File path: assets/images/product_svg/downicon.svg
+  String get downicon => 'assets/images/product_svg/downicon.svg';
 
-  /// File path: assets/images/sale_svg/filter.svg
-  String get filter => 'assets/images/sale_svg/filter.svg';
+  /// File path: assets/images/product_svg/filter.svg
+  String get filter => 'assets/images/product_svg/filter.svg';
 
-  /// File path: assets/images/sale_svg/scan.svg
-  String get scan => 'assets/images/sale_svg/scan.svg';
+  /// File path: assets/images/product_svg/scan.svg
+  String get scan => 'assets/images/product_svg/scan.svg';
 
-  /// File path: assets/images/sale_svg/search.svg
-  String get search => 'assets/images/sale_svg/search.svg';
+  /// File path: assets/images/product_svg/search.svg
+  String get search => 'assets/images/product_svg/search.svg';
 
-  /// File path: assets/images/sale_svg/uparrow.svg
-  String get uparrow => 'assets/images/sale_svg/uparrow.svg';
+  /// File path: assets/images/product_svg/uparrow.svg
+  String get uparrow => 'assets/images/product_svg/uparrow.svg';
 
-  /// File path: assets/images/sale_svg/upicon.svg
-  String get upicon => 'assets/images/sale_svg/upicon.svg';
+  /// File path: assets/images/product_svg/upicon.svg
+  String get upicon => 'assets/images/product_svg/upicon.svg';
 
   /// List of all assets
   List<String> get values => [downicon, filter, scan, search, uparrow, upicon];

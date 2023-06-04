@@ -87,7 +87,7 @@ class CustomProductCard extends StatelessWidget {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              Assets.images.saleSvg.upicon,
+                              Assets.images.productSvg.upicon,
                               height: 9,
                             ),
                             const SizedBox(
@@ -99,7 +99,7 @@ class CustomProductCard extends StatelessWidget {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              Assets.images.saleSvg.downicon,
+                              Assets.images.productSvg.downicon,
                               height: 9,
                             ),
                             const SizedBox(

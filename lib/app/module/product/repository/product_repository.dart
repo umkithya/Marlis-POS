@@ -15,13 +15,13 @@ class ProductRepo extends ProductRepositoryBase {
           stockInhand: 1400,
           listProduct: [
             ProductListModel(
-                imageProduct: Assets.images.salePng.coca.path,
+                imageProduct: Assets.images.productPng.coca.path,
                 nameProduct: 'Coca Cola',
                 buy: 120,
                 sell: 110,
                 type: ProductStockType.low),
             ProductListModel(
-              imageProduct: Assets.images.salePng.hotdog.path,
+              imageProduct: Assets.images.productPng.hotdog.path,
               nameProduct: 'Bet Ham SS',
               buy: 120,
               sell: 30,
@@ -30,7 +30,7 @@ class ProductRepo extends ProductRepositoryBase {
                 nameProduct: 'Water Lemon',
                 buy: 420,
                 sell: 420,
-                imageProduct: Assets.images.salePng.melon.path,
+                imageProduct: Assets.images.productPng.melon.path,
                 type: ProductStockType.outofstock)
           ]);
     });

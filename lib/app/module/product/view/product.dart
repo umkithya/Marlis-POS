@@ -57,7 +57,7 @@ class ProductPage extends StatelessWidget {
                       .titleMedium!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                SvgPicture.asset(Assets.images.saleSvg.filter)
+                SvgPicture.asset(Assets.images.productSvg.filter)
               ],
             ),
           ),
@@ -149,7 +149,7 @@ class ProductAndStock extends StatelessWidget {
                       ? AppColors.appBlue
                       : AppColors.colorGreen,
                   borderRadius: BorderRadius.circular(8)),
-              child: SvgPicture.asset(Assets.images.saleSvg.uparrow,
+              child: SvgPicture.asset(Assets.images.productSvg.uparrow,
                   color: AppColors.pageBackground),
             ),
             const SizedBox(
@@ -190,11 +190,11 @@ class Header extends StatelessWidget {
         ),
         Row(
           children: [
-            SvgPicture.asset(Assets.images.saleSvg.scan),
+            SvgPicture.asset(Assets.images.productSvg.scan),
             const SizedBox(
               width: 25,
             ),
-            SvgPicture.asset(Assets.images.saleSvg.search)
+            SvgPicture.asset(Assets.images.productSvg.search)
           ],
         ),
       ],
