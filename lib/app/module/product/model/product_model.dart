@@ -14,6 +14,12 @@ class ProductListModel {
   String? imageProduct;
   String? nameProduct;
   int? buy, sell;
+  int? price;
   ProductListModel(
-      {this.imageProduct, this.nameProduct, this.type, this.buy, this.sell});
+      {this.price,
+      this.imageProduct,
+      this.nameProduct,
+      this.type,
+      this.buy,
+      this.sell});
 }

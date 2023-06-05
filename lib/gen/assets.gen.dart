@@ -15,9 +15,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/add order.svg
   String get addOrder => 'assets/images/add order.svg';
 
-  /// File path: assets/images/cart.svg
-  String get cart => 'assets/images/cart.svg';
-
   /// File path: assets/images/ganzberg.svg
   String get ganzberg => 'assets/images/ganzberg.svg';
 
@@ -27,9 +24,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/malis-pos-logo.png
   AssetGenImage get malisPosLogo =>
       const AssetGenImage('assets/images/malis-pos-logo.png');
-
-  /// File path: assets/images/menu.svg
-  String get menu => 'assets/images/menu.svg';
 
   /// File path: assets/images/nike_animation.mp4
   String get nikeAnimation => 'assets/images/nike_animation.mp4';
@@ -48,14 +42,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/report.svg
   String get report => 'assets/images/report.svg';
 
+  $AssetsImagesSaleImageGen get saleImage => const $AssetsImagesSaleImageGen();
+
   /// List of all assets
   List<dynamic> get values => [
         addOrder,
-        cart,
         ganzberg,
         home,
         malisPosLogo,
-        menu,
         nikeAnimation,
         notificaiton,
         product,
@@ -105,6 +99,41 @@ class $AssetsImagesProductSvgGen {
 
   /// List of all assets
   List<String> get values => [downicon, filter, scan, search, uparrow, upicon];
+}
+
+class $AssetsImagesSaleImageGen {
+  const $AssetsImagesSaleImageGen();
+
+  /// File path: assets/images/sale_image/available.svg
+  String get available => 'assets/images/sale_image/available.svg';
+
+  /// File path: assets/images/sale_image/cart.svg
+  String get cart => 'assets/images/sale_image/cart.svg';
+
+  /// File path: assets/images/sale_image/food1.svg
+  String get food1 => 'assets/images/sale_image/food1.svg';
+
+  /// File path: assets/images/sale_image/food2.svg
+  String get food2 => 'assets/images/sale_image/food2.svg';
+
+  /// File path: assets/images/sale_image/food3.svg
+  String get food3 => 'assets/images/sale_image/food3.svg';
+
+  /// File path: assets/images/sale_image/food4.svg
+  String get food4 => 'assets/images/sale_image/food4.svg';
+
+  /// File path: assets/images/sale_image/menu.svg
+  String get menu => 'assets/images/sale_image/menu.svg';
+
+  /// File path: assets/images/sale_image/sort.svg
+  String get sort => 'assets/images/sale_image/sort.svg';
+
+  /// File path: assets/images/sale_image/unavailable.svg
+  String get unavailable => 'assets/images/sale_image/unavailable.svg';
+
+  /// List of all assets
+  List<String> get values =>
+      [available, cart, food1, food2, food3, food4, menu, sort, unavailable];
 }
 
 class Assets {

@@ -8,10 +8,9 @@ class AppColors extends GetxController {
   static const Color pageBackground = Color(0xFFFAFBFD);
   var colorBackground = const Color(0xFFD8D8D8);
   static const Color colorRed = Color(0xFFEB5757);
-
   static const Color colorLightOrange = Color(0xFFFDEDE1);
   static const Color colorLightRed = Color(0xFFFDE1E1);
-
+  static const Color colorLightWhite = Color(0xFFF2F2F2);
   static const Color colorGreen = Color(0xFF2FA107);
   static const Color colorLightGreen = Color(0xFFEDF5EE);
   static const Color statusOrange = Color(0xFFFABD22);

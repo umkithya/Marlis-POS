@@ -49,7 +49,10 @@ class ItemBar extends StatelessWidget {
               style: TextStyle(
                   fontWeight: onTapIndex == currentIndex
                       ? FontWeight.w600
-                      : FontWeight.w500,
+                      : FontWeight.w400,
+                  color: onTapIndex == currentIndex
+                      ? AppColors.pageBackground
+                      : AppColors.colorUnselect,
                   fontSize: 10),
             )
           ],

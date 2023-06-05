@@ -25,11 +25,11 @@ class BottomNavigation extends StatelessWidget {
           controller: advancedDrawerController,
           animationCurve: Curves.linearToEaseOut,
           animationDuration: const Duration(milliseconds: 300),
-          animateChildDecoration: true,
+          animateChildDecoration: false,
           rtlOpening: false,
           // openScale: 0.9,
           openRatio: 0.7,
-          disabledGestures: false,
+          disabledGestures: true,
           childDecoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
@@ -45,16 +45,30 @@ class BottomNavigation extends StatelessWidget {
                 // GoRouterState.of(context).location.startsWith("/sales");
               },
               shape: const CircleBorder(),
-              child: SvgPicture.asset(
-                Assets.images.addOrder,
-                color: GoRouterState.of(context).location == "/sales"
-                    ? AppColors.pageBackground
-                    : AppColors.colorUnselect,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    Assets.images.addOrder,
+                    color: GoRouterState.of(context).location == "/sales"
+                        ? AppColors.pageBackground
+                        : AppColors.colorUnselect,
+                  ),
+                  Text("Sales",
+                      style: TextStyle(
+                          fontWeight:
+                              GoRouterState.of(context).location == "/sales"
+                                  ? FontWeight.w600
+                                  : FontWeight.w400,
+                          fontSize: 10))
+                ],
               ),
             ),
             body: child!,
             bottomNavigationBar: BottomAppBar(
               // ****** APP BAR ******************
+              // surfaceTintColor: Colors.red,
               color: Theme.of(context).primaryColor,
               clipBehavior: Clip.antiAlias,
               shape: const CircularNotchedRectangle(),
