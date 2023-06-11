@@ -19,17 +19,20 @@ class ProductRepo extends ProductRepositoryBase {
                 nameProduct: 'Coca Cola',
                 buy: 120,
                 sell: 110,
+                price: 2500,
                 type: ProductStockType.low),
             ProductListModel(
               imageProduct: Assets.images.productPng.hotdog.path,
               nameProduct: 'Bet Ham SS',
               buy: 120,
+              price: 1000,
               sell: 30,
             ),
             ProductListModel(
                 nameProduct: 'Water Lemon',
                 buy: 420,
                 sell: 420,
+                price: 2000,
                 imageProduct: Assets.images.productPng.melon.path,
                 type: ProductStockType.outofstock)
           ]);

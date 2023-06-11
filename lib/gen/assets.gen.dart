@@ -110,6 +110,12 @@ class $AssetsImagesSaleImageGen {
   /// File path: assets/images/sale_image/cart.svg
   String get cart => 'assets/images/sale_image/cart.svg';
 
+  /// File path: assets/images/sale_image/decreaseicon.svg
+  String get decreaseicon => 'assets/images/sale_image/decreaseicon.svg';
+
+  /// File path: assets/images/sale_image/deleteIcon.svg
+  String get deleteIcon => 'assets/images/sale_image/deleteIcon.svg';
+
   /// File path: assets/images/sale_image/food1.svg
   String get food1 => 'assets/images/sale_image/food1.svg';
 
@@ -122,6 +128,9 @@ class $AssetsImagesSaleImageGen {
   /// File path: assets/images/sale_image/food4.svg
   String get food4 => 'assets/images/sale_image/food4.svg';
 
+  /// File path: assets/images/sale_image/increaseicon.svg
+  String get increaseicon => 'assets/images/sale_image/increaseicon.svg';
+
   /// File path: assets/images/sale_image/menu.svg
   String get menu => 'assets/images/sale_image/menu.svg';
 
@@ -132,8 +141,20 @@ class $AssetsImagesSaleImageGen {
   String get unavailable => 'assets/images/sale_image/unavailable.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [available, cart, food1, food2, food3, food4, menu, sort, unavailable];
+  List<String> get values => [
+        available,
+        cart,
+        decreaseicon,
+        deleteIcon,
+        food1,
+        food2,
+        food3,
+        food4,
+        increaseicon,
+        menu,
+        sort,
+        unavailable
+      ];
 }
 
 class Assets {

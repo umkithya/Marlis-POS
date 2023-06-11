@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/product/widget/product_card.dart';
 import 'package:malispos/app/module/sales/controller/sale_controller.dart';
 
@@ -23,7 +24,7 @@ class SaleView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         header(context, 1),
-                        searchBlock(),
+                        searchBlock(context),
                         categoryBlock(state!.listCategory ?? []),
                         productListBlock(state.listProduct ?? [])
                       ]),
@@ -45,7 +46,7 @@ class SaleView extends StatelessWidget {
               primary: true,
               shrinkWrap: true,
               addAutomaticKeepAlives: true,
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 20,
@@ -191,7 +192,7 @@ class SaleView extends StatelessWidget {
     );
   }
 
-  Padding searchBlock() {
+  Padding searchBlock(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Row(
@@ -214,10 +215,16 @@ class SaleView extends StatelessWidget {
                     const BoxConstraints(maxHeight: 30, minHeight: 30),
                 suffixIconConstraints: const BoxConstraints(
                     maxHeight: 30, minHeight: 30, maxWidth: 150),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: SvgPicture.asset(
-                    Assets.images.productSvg.scan,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    final location = GoRouter.of(context).location;
+                    context.push("$location/scansale");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SvgPicture.asset(
+                      Assets.images.productSvg.scan,
+                    ),
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 15),

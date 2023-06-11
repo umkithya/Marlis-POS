@@ -15,9 +15,12 @@ import 'package:malispos/app/module/reports/view/reports.dart';
 import 'package:malispos/app/module/sales/binding/sale_binding.dart';
 import 'package:malispos/app/module/sales/controller/sale_controller.dart';
 import 'package:malispos/app/module/sales/view/sale_view.dart';
+import 'package:malispos/app/module/scan_page/controller/scan_controller.dart';
+import 'package:malispos/app/module/scan_page/view/scan_page.dart';
 
 import '../module/bottom_naivigaton/view/bottom_navition.dart';
 import '../module/home/view/home_screen.dart';
+import '../module/scan_page/binding/scan_binding.dart';
 import '../module/splash_screen/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -29,6 +32,7 @@ class AppRoute {
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/sales',
+    // redirect: (context, state) => "/sales",
     routes: <RouteBase>[
       // / Application shell
       GoRoute(
@@ -49,45 +53,110 @@ class AppRoute {
           return BottomNavigation(child: child);
         },
         routes: <RouteBase>[
-          BindingRouter(
-            SaleController(),
-            path: '/sales',
-            // parentNavigatorKey: _shellNavigatorKey,
-            binding: SaleBinding(),
-            page: (context, state) => const SaleView(),
-          ),
-          BindingRouter(HomeController(),
+          BindingRouter<SaleController>(
+              path: '/sales',
+              // parentNavigatorKey: _shellNavigatorKey,
+              binding: SaleBinding(),
+              builderPage: (context, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    transitionDuration: const Duration(milliseconds: 0),
+                    child: const SaleView(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) =>
+                            FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                  ),
+              routes: [
+                BindingRouter<ScanController>(
+                  path: 'scansale',
+                  binding: ScanBinding(),
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builderPage: (context, state) => CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      transitionDuration: const Duration(milliseconds: 150),
+                      reverseTransitionDuration:
+                          const Duration(milliseconds: 150),
+                      child: const ScanPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1.0, 0.0);
+                        const end = Offset.zero;
+                        final tween = Tween(begin: begin, end: end);
+                        final offsetAnimation = animation.drive(tween);
+                        return SlideTransition(
+                          transformHitTests: false,
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      }),
+                ),
+              ]),
+          BindingRouter<HomeController>(
               path: '/home',
               binding: HomeBinding(),
-              page: (context, state) => const HomeScreen(),
+              builderPage: (context, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    transitionDuration: const Duration(milliseconds: 0),
+                    child: const HomeScreen(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                  ),
               routes: [
-                BindingRouter(
-                  ProductController(),
+                BindingRouter<ProductController>(
                   path: 'productsdetail',
                   binding: ProductBinding(),
                   parentNavigatorKey: _rootNavigatorKey,
-                  page: (context, state) => const ProductPage(),
+                  builderPage: (context, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    transitionDuration: const Duration(milliseconds: 0),
+                    child: const ProductPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                  ),
                 ),
               ]),
-          BindingRouter(
-            ProductController(),
+          BindingRouter<ProductController>(
             path: '/products',
             binding: ProductBinding(),
-            page: (context, state) => const ProductPage(),
+            builderPage: (context, state) => CustomTransitionPage<void>(
+              key: state.pageKey,
+              transitionDuration: const Duration(milliseconds: 0),
+              child: const ProductPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      FadeTransition(opacity: animation, child: child),
+            ),
           ),
-          BindingRouter(
-            ReportController(),
+          BindingRouter<ReportController>(
             path: '/reports',
             binding: ReportBinding(),
-            page: (context, state) => const ReportPage(),
+            builderPage: (context, state) => CustomTransitionPage<void>(
+              key: state.pageKey,
+              transitionDuration: const Duration(milliseconds: 0),
+              child: const ReportPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      FadeTransition(opacity: animation, child: child),
+            ),
           ),
 
-          BindingRouter(
-            NotificaitonController(),
+          BindingRouter<NotificaitonController>(
             path: '/notifications',
             binding: NotificationBinding(),
-            page: (context, state) => const NotificationPage(),
+            builderPage: (context, state) => CustomTransitionPage<void>(
+              key: state.pageKey,
+              transitionDuration: const Duration(milliseconds: 0),
+              child: const NotificationPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      FadeTransition(opacity: animation, child: child),
+            ),
           ),
+
           //  BindingRouter(
           //   NotificaitonController(),
           //   path: '/notifications',
@@ -98,12 +167,13 @@ class AppRoute {
             path: '/notifications',
             pageBuilder: (_, s) {
               return CustomTransitionPage<void>(
-                key: s.pageKey,
-                child: const NotificationPage(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) =>
-                        FadeTransition(opacity: animation, child: child),
-              );
+                  key: s.pageKey,
+                  child: const NotificationPage(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                  reverseTransitionDuration: Duration(seconds: 4),
+                  transitionDuration: Duration(seconds: 4));
             },
           ),
         ],

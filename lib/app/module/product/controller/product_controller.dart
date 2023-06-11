@@ -8,7 +8,7 @@ class ProductController extends GetxController with StateMixin<ProductsModel> {
   static final instance = ProductController._();
   factory ProductController() => instance;
   final productrepo = ProductRepo();
-
+  final productListTest = <ProductListModel>[].obs;
   @override
   void onInit() {
     fetctProductData();
@@ -21,6 +21,7 @@ class ProductController extends GetxController with StateMixin<ProductsModel> {
     // ignore: unnecessary_null_comparison
     if (response != null) {
       change(response, status: RxStatus.success());
+      productListTest.addAll(response.listProduct!);
     } else {
       change(ProductsModel(), status: RxStatus.empty());
     }

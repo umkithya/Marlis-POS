@@ -25,7 +25,7 @@ class BottomNavigation extends StatelessWidget {
           controller: advancedDrawerController,
           animationCurve: Curves.linearToEaseOut,
           animationDuration: const Duration(milliseconds: 300),
-          animateChildDecoration: false,
+          animateChildDecoration: true,
           rtlOpening: false,
           // openScale: 0.9,
           openRatio: 0.7,
@@ -38,6 +38,7 @@ class BottomNavigation extends StatelessWidget {
 
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.miniCenterDocked,
+            resizeToAvoidBottomInset: false,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Theme.of(context).primaryColor,
               onPressed: () {
@@ -74,7 +75,7 @@ class BottomNavigation extends StatelessWidget {
               shape: const CircularNotchedRectangle(),
               notchMargin: 6,
               padding: const EdgeInsets.all(0),
-              shadowColor: Colors.transparent,
+              // shadowColor: Colors.transparent,
               elevation: 10,
               height: 80,
               child: Row(

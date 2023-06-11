@@ -45,10 +45,10 @@ packages:
     dependency: "direct main"
     description:
       name: binding_router
-      sha256: "95cf779f4d9b28b954e2ab1b03d03ea49ce0d7f1ceaa895d67247cfb7b9267a4"
+      sha256: e4c6b71697d11a15f77332d63e1c91ca7f7a24d38042d6d99b56d7728cf4bd06
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   boolean_selector:
     dependency: transitive
     description:
