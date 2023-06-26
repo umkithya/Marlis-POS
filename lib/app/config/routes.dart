@@ -12,8 +12,6 @@ import 'package:malispos/app/module/product/view/product.dart';
 import 'package:malispos/app/module/reports/binding/report_binding.dart';
 import 'package:malispos/app/module/reports/controller/report_controller.dart';
 import 'package:malispos/app/module/reports/view/reports.dart';
-import 'package:malispos/app/module/sales/main_screnn/binding/sale_binding.dart';
-import 'package:malispos/app/module/sales/main_screnn/controller/sale_controller.dart';
 import 'package:malispos/app/module/sales/main_screnn/view/sale_view.dart';
 import 'package:malispos/app/module/sales/view/make_payment_screen.dart';
 import 'package:malispos/app/module/sales/controller/scan_controller.dart';
@@ -21,7 +19,9 @@ import 'package:malispos/app/module/sales/view/scan_page.dart';
 
 import '../module/bottom_naivigaton/view/bottom_navition.dart';
 import '../module/home/view/home_screen.dart';
+import '../module/sales/binding/sale_binding.dart';
 import '../module/sales/binding/scan_binding.dart';
+import '../module/sales/controller/sale_controller.dart';
 import '../module/splash_screen/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:malispos/app/module/sales/main_screnn/repository/sale_repo.dart';
 import '../model/sale_model.dart';
+import '../repository/sale_repo.dart';
 
 class SaleController extends GetxController with StateMixin<SaleModel> {
   SaleController._();
