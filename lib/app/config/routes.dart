@@ -15,13 +15,13 @@ import 'package:malispos/app/module/reports/view/reports.dart';
 import 'package:malispos/app/module/sales/main_screnn/binding/sale_binding.dart';
 import 'package:malispos/app/module/sales/main_screnn/controller/sale_controller.dart';
 import 'package:malispos/app/module/sales/main_screnn/view/sale_view.dart';
-import 'package:malispos/app/module/sales/make_payment_screen.dart/view/make_payment_screen.dart';
-import 'package:malispos/app/module/sales/scan_page/controller/scan_controller.dart';
-import 'package:malispos/app/module/sales/scan_page/view/scan_page.dart';
+import 'package:malispos/app/module/sales/view/make_payment_screen.dart';
+import 'package:malispos/app/module/sales/controller/scan_controller.dart';
+import 'package:malispos/app/module/sales/view/scan_page.dart';
 
 import '../module/bottom_naivigaton/view/bottom_navition.dart';
 import '../module/home/view/home_screen.dart';
-import '../module/sales/scan_page/binding/scan_binding.dart';
+import '../module/sales/binding/scan_binding.dart';
 import '../module/splash_screen/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =

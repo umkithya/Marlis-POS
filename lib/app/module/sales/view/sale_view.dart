@@ -6,9 +6,9 @@ import 'package:malispos/app/module/product/widget/product_card.dart';
 import 'package:malispos/app/module/sales/main_screnn/controller/sale_controller.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../core/values/app_colors.dart';
-import '../../../bottom_naivigaton/view/bottom_navition.dart';
-import '../../../product/model/product_model.dart';
+import '../../../core/values/app_colors.dart';
+import '../../bottom_naivigaton/view/bottom_navition.dart';
+import '../../product/model/product_model.dart';
 import '../model/sale_model.dart';
 
 class SaleView extends StatelessWidget {

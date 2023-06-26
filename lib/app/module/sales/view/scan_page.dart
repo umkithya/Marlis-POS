@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/product/controller/product_controller.dart';
 
-import '../../../../../gen/assets.gen.dart';
-import '../../../../core/values/app_colors.dart';
-import '../../widget/custom_button_make_payment.dart';
-import '../../widget/custom_card_sale.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../core/values/app_colors.dart';
+import '../widget/custom_button_make_payment.dart';
+import '../widget/custom_card_sale.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key});

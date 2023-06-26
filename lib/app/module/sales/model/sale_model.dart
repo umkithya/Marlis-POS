@@ -1,4 +1,5 @@
-import '../../../product/model/product_model.dart';
+
+import '../../product/model/product_model.dart';
 
 class SaleModel {
   List<Category>? listCategory;

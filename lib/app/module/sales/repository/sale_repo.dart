@@ -1,9 +1,8 @@
 import 'package:malispos/app/module/product/model/product_model.dart';
-import 'package:malispos/app/module/sales/main_screnn/model/sale_model.dart';
-import 'package:malispos/app/module/sales/main_screnn/repository/sale_repo_base.dart';
 import 'package:malispos/gen/assets.gen.dart';
-
-import '../../../product/widget/product_card.dart';
+import '../../product/widget/product_card.dart';
+import '../model/sale_model.dart';
+import 'sale_repo_base.dart';
 
 class SaleRepo extends SaleRepositoryBase {
   @override
