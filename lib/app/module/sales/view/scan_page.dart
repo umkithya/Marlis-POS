@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/app/module/product/controller/product_controller.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -83,9 +84,7 @@ class ScanPage extends StatelessWidget {
           const SizedBox.shrink(),
           Text(
             "Scanner",
-            style: Theme.of(context)
-                .primaryTextTheme
-                .labelLarge!
+            style: context.labelLarge!
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Container(
