@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/gen/assets.gen.dart';
 
 import '../../../core/values/app_colors.dart';
 import '../../product/widget/product_card.dart';
-
-extension Sizes on num {
-  Widget get sh => SizedBox(height: toDouble());
-  Widget get sW => SizedBox(width: toDouble());
-}
 
 //Card sale
 class CustomCardSale extends StatelessWidget {
