@@ -134,6 +134,18 @@ class $AssetsImagesSaleImageGen {
   /// File path: assets/images/sale_image/menu.svg
   String get menu => 'assets/images/sale_image/menu.svg';
 
+  /// File path: assets/images/sale_image/more.svg
+  String get more => 'assets/images/sale_image/more.svg';
+
+  /// File path: assets/images/sale_image/otherIcon.svg
+  String get otherIcon => 'assets/images/sale_image/otherIcon.svg';
+
+  /// File path: assets/images/sale_image/personadd.svg
+  String get personadd => 'assets/images/sale_image/personadd.svg';
+
+  /// File path: assets/images/sale_image/printer.svg
+  String get printer => 'assets/images/sale_image/printer.svg';
+
   /// File path: assets/images/sale_image/sort.svg
   String get sort => 'assets/images/sale_image/sort.svg';
 
@@ -152,6 +164,10 @@ class $AssetsImagesSaleImageGen {
         food4,
         increaseicon,
         menu,
+        more,
+        otherIcon,
+        personadd,
+        printer,
         sort,
         unavailable
       ];

@@ -1,4 +1,3 @@
-
 import '../../product/model/product_model.dart';
 
 class SaleModel {
@@ -11,4 +10,10 @@ class Category {
   String? imagepath;
   String? name;
   Category({this.imagepath, this.name});
+}
+
+class CartModel {
+  ProductListModel? productList;
+  int? qty;
+  CartModel({this.productList, this.qty});
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/app/module/product/controller/product_controller.dart';
+import 'package:malispos/app/module/sales/controller/sale_controller.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
@@ -19,7 +20,6 @@ class ScanPage extends StatelessWidget {
         return Future.value(true);
       },
       child: Scaffold(
-        backgroundColor: appColors.colorBackground,
         body: SafeArea(
           child: Column(
             children: [
@@ -29,7 +29,9 @@ class ScanPage extends StatelessWidget {
               CustomButtonMakePayment(
                 ontap: () {
                   final location = GoRouter.of(context).location;
-                  context.push("$location/makepayment");
+                  context.push("$location/makepayment", extra: {
+                    'prductlist': SaleController.instance.listSellProduct
+                  });
                 },
               )
             ],

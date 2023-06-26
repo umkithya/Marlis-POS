@@ -1,4 +1,5 @@
 import 'package:binding_router/binding_router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/home/Binding/home_binding.dart';
@@ -79,7 +80,12 @@ class AppRoute {
                           path: 'makepayment',
                           parentNavigatorKey: _rootNavigatorKey,
                           builder: (context, state) {
-                            return const MakePaymentScreen();
+                            var listproduct =
+                                state.extra as Map<String, dynamic>;
+                            return MakePaymentScreen(
+                              listProduct:
+                                  listproduct['prductlist'] as List<Category>,
+                            );
                           }),
                     ]),
               ]),

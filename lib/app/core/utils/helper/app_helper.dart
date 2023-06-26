@@ -8,6 +8,7 @@ extension Sizes on num {
 extension AppColor on BuildContext {
   ThemeData get themeData => Theme.of(this);
   Color get primaryColor => themeData.primaryColor;
+  Color get backgoundColor => themeData.scaffoldBackgroundColor;
   TextTheme get textTheme => themeData.primaryTextTheme;
   TextStyle? get displayLarge => textTheme.displayLarge;
   TextStyle? get displayMedium => textTheme.displayMedium;
