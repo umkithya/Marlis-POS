@@ -3,9 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/product/controller/product_controller.dart';
 
-import '../../../../gen/assets.gen.dart';
-import '../../../core/values/app_colors.dart';
-import '../../sales/widget/custom_card_sale.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../../core/values/app_colors.dart';
+import '../../widget/custom_button_make_payment.dart';
+import '../../widget/custom_card_sale.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key});
@@ -20,7 +21,17 @@ class ScanPage extends StatelessWidget {
         backgroundColor: appColors.colorBackground,
         body: SafeArea(
           child: Column(
-            children: [header(context, 2), scanBlock(), cardBlock()],
+            children: [
+              header(context, 2),
+              scanBlock(),
+              Expanded(child: cardBlock()),
+              CustomButtonMakePayment(
+                ontap: () {
+                  final location = GoRouter.of(context).location;
+                  context.push("$location/makepayment");
+                },
+              )
+            ],
           ),
         ),
       ),
@@ -29,9 +40,10 @@ class ScanPage extends StatelessWidget {
 
   Padding cardBlock() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView.builder(
+        child: ListView.separated(
             shrinkWrap: true,
             itemCount: ProductController.instance.productListTest.length,
+            separatorBuilder: (context, index) => 10.sh,
             itemBuilder: (context, index) => CustomCardSale(
                   imagePath: ProductController
                       .instance.productListTest[index].imageProduct,

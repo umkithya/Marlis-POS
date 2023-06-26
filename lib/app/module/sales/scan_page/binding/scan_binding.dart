@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:malispos/app/module/scan_page/controller/scan_controller.dart';
+import 'package:malispos/app/module/sales/scan_page/controller/scan_controller.dart';
 
 class ScanBinding extends Bindings {
   @override

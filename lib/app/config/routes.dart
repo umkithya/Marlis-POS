@@ -12,15 +12,16 @@ import 'package:malispos/app/module/product/view/product.dart';
 import 'package:malispos/app/module/reports/binding/report_binding.dart';
 import 'package:malispos/app/module/reports/controller/report_controller.dart';
 import 'package:malispos/app/module/reports/view/reports.dart';
-import 'package:malispos/app/module/sales/binding/sale_binding.dart';
-import 'package:malispos/app/module/sales/controller/sale_controller.dart';
-import 'package:malispos/app/module/sales/view/sale_view.dart';
-import 'package:malispos/app/module/scan_page/controller/scan_controller.dart';
-import 'package:malispos/app/module/scan_page/view/scan_page.dart';
+import 'package:malispos/app/module/sales/main_screnn/binding/sale_binding.dart';
+import 'package:malispos/app/module/sales/main_screnn/controller/sale_controller.dart';
+import 'package:malispos/app/module/sales/main_screnn/view/sale_view.dart';
+import 'package:malispos/app/module/sales/make_payment_screen.dart/view/make_payment_screen.dart';
+import 'package:malispos/app/module/sales/scan_page/controller/scan_controller.dart';
+import 'package:malispos/app/module/sales/scan_page/view/scan_page.dart';
 
 import '../module/bottom_naivigaton/view/bottom_navition.dart';
 import '../module/home/view/home_screen.dart';
-import '../module/scan_page/binding/scan_binding.dart';
+import '../module/sales/scan_page/binding/scan_binding.dart';
 import '../module/splash_screen/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -70,28 +71,34 @@ class AppRoute {
                   ),
               routes: [
                 BindingRouter<ScanController>(
-                  path: 'scansale',
-                  binding: ScanBinding(),
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builderPage: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      transitionDuration: const Duration(milliseconds: 150),
-                      reverseTransitionDuration:
-                          const Duration(milliseconds: 150),
-                      child: const ScanPage(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        const begin = Offset(1.0, 0.0);
-                        const end = Offset.zero;
-                        final tween = Tween(begin: begin, end: end);
-                        final offsetAnimation = animation.drive(tween);
-                        return SlideTransition(
-                          transformHitTests: false,
-                          position: offsetAnimation,
-                          child: child,
-                        );
-                      }),
-                ),
+                    path: 'scansale',
+                    binding: ScanBinding(),
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builderPage: (context, state) => CustomTransitionPage<void>(
+                        key: state.pageKey,
+                        transitionDuration: const Duration(milliseconds: 150),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 150),
+                        child: const ScanPage(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1.0, 0.0);
+                          const end = Offset.zero;
+                          final tween = Tween(begin: begin, end: end);
+                          final offsetAnimation = animation.drive(tween);
+                          return SlideTransition(
+                            transformHitTests: false,
+                            position: offsetAnimation,
+                            child: child,
+                          );
+                        }),
+                    routes: [
+                      GoRoute(
+                          path: 'makepayment',
+                          builder: (context, state) {
+                            return const MakePaymentScreen();
+                          }),
+                    ]),
               ]),
           BindingRouter<HomeController>(
               path: '/home',
@@ -172,8 +179,8 @@ class AppRoute {
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) =>
                           FadeTransition(opacity: animation, child: child),
-                  reverseTransitionDuration: Duration(seconds: 4),
-                  transitionDuration: Duration(seconds: 4));
+                  reverseTransitionDuration: const Duration(seconds: 4),
+                  transitionDuration: const Duration(seconds: 4));
             },
           ),
         ],

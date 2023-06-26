@@ -1,14 +1,14 @@
 import 'package:malispos/app/module/product/model/product_model.dart';
-import 'package:malispos/app/module/sales/model/sale_model.dart';
-import 'package:malispos/app/module/sales/repository/sale_repo_base.dart';
+import 'package:malispos/app/module/sales/main_screnn/model/sale_model.dart';
+import 'package:malispos/app/module/sales/main_screnn/repository/sale_repo_base.dart';
 import 'package:malispos/gen/assets.gen.dart';
 
-import '../../product/widget/product_card.dart';
+import '../../../product/widget/product_card.dart';
 
 class SaleRepo extends SaleRepositoryBase {
   @override
   Future<SaleModel> getSaleData() async {
-    var response;
+    SaleModel? response;
     await Future.delayed(const Duration(milliseconds: 500), () {
       response = SaleModel(listCategory: [
         Category(imagepath: Assets.images.saleImage.food1, name: "food1"),
@@ -88,7 +88,7 @@ class SaleRepo extends SaleRepositoryBase {
             type: ProductStockType.outofstock)
       ]);
     });
-    if (response != null) return response;
+    if (response != null) return response!;
     return SaleModel();
   }
 }
