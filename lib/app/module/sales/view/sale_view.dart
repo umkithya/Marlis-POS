@@ -6,7 +6,6 @@ import 'package:malispos/app/module/product/widget/product_card.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
-import '../../bottom_naivigaton/view/bottom_navition.dart';
 import '../../product/model/product_model.dart';
 import '../controller/sale_controller.dart';
 import '../model/sale_model.dart';
@@ -17,7 +16,6 @@ class SaleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: appColors.colorBackground,
         body: SaleController.instance.obx(
             (state) => SafeArea(
                   child: Column(
@@ -36,7 +34,7 @@ class SaleView extends StatelessWidget {
             onError: (e) => const Text("data is error")));
   }
 
-  Expanded productListBlock(List<ProductListModel> list) => Expanded(
+  Widget productListBlock(List<ProductListModel> list) => Expanded(
         child: Container(
           height: double.infinity,
           padding: const EdgeInsets.only(top: 36),
@@ -240,21 +238,22 @@ class SaleView extends StatelessWidget {
     );
   }
 
-  Padding header(BuildContext context, int? cartcount) {
+  Widget header(BuildContext context, int? cartcount) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
-              advancedDrawerController.showDrawer();
-            },
-            child: SvgPicture.asset(
-              Assets.images.saleImage.menu,
-              height: 35,
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     advancedDrawerController.showDrawer();
+          //   },
+          //   child: SvgPicture.asset(
+          //     Assets.images.saleImage.menu,
+          //     height: 35,
+          //   ),
+          // ),
+          // IconButton(icon: Icon(),),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             decoration: BoxDecoration(

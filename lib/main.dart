@@ -20,10 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRoute.router,
-      // title: 'Flutter Demo',
       theme: lightThemeData,
-      themeMode: ThemeMode.light,
-      // home: const MyHomePage(),
+      // themeMode: ThemeMode.light,
     );
   }
 }

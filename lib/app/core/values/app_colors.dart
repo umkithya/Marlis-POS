@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 final appColors = Get.put(AppColors());
 
 class AppColors extends GetxController {
-  var colorPrimary = const Color(0xFF0070D7).obs;
+  var   colorPrimary = const Color(0xFF0070D7).obs;
   static const Color pageBackground = Color(0xFFFAFBFD);
   var colorBackground = const Color(0xFFD8D8D8);
   static const Color colorRed = Color(0xFFEB5757);
