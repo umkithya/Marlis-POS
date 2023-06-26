@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '/app/core/values/app_colors.dart';
 
 var lightThemeData = ThemeData(
-  cardColor: appColors.colorPrimary.value,
   primaryColor: appColors.colorPrimary.value,
   dividerColor: AppColors.colorDevider,
+  primaryIconTheme: IconThemeData(color: appColors.colorPrimary.value),
   primaryTextTheme: TextTheme(
     headlineLarge: const TextStyle(
         fontSize: 16,
@@ -35,9 +35,6 @@ var lightThemeData = ThemeData(
         fontSize: 12,
         color: AppColors.colorTextBlack,
         fontStyle: FontStyle.normal),
-
-    ///Title
-
     titleSmall: const TextStyle(
         fontSize: 12,
         color: AppColors.colorTextGrey,

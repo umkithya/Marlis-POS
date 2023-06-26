@@ -12,7 +12,7 @@ import 'package:malispos/app/module/product/view/product.dart';
 import 'package:malispos/app/module/reports/binding/report_binding.dart';
 import 'package:malispos/app/module/reports/controller/report_controller.dart';
 import 'package:malispos/app/module/reports/view/reports.dart';
-import '../module/bottom_naivigaton/view/bottom_navition.dart';
+import '../module/bottom_navigation_bar/view/bottom_navigation_bar.dart';
 import '../module/home/view/home_screen.dart';
 import '../module/sales/binding/sale_binding.dart';
 import '../module/sales/binding/scan_binding.dart';

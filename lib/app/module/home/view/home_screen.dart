@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/home/controller/home_controller.dart';
 
 import '../../../core/values/app_colors.dart';
-import '../../bottom_naivigaton/view/bottom_navition.dart';
+import '../../bottom_navigation_bar/view/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

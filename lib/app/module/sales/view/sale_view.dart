@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/app/module/product/widget/product_card.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
+import '../../bottom_navigation_bar/view/bottom_navigation_bar.dart';
 import '../../product/model/product_model.dart';
 import '../controller/sale_controller.dart';
 import '../model/sale_model.dart';
@@ -239,48 +242,77 @@ class SaleView extends StatelessWidget {
   }
 
   Widget header(BuildContext context, int? cartcount) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // GestureDetector(
-          //   onTap: () {
-          //     advancedDrawerController.showDrawer();
-          //   },
-          //   child: SvgPicture.asset(
-          //     Assets.images.saleImage.menu,
-          //     height: 35,
-          //   ),
-          // ),
-          // IconButton(icon: Icon(),),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.white),
-            child: Row(children: [
-              Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // GestureDetector(
+        //   onTap: () {
+        //     advancedDrawerController.showDrawer();
+        //   },
+        //   child: SvgPicture.asset(
+        //     Assets.images.saleImage.menu,
+        //     height: 35,
+        //   ),
+        // ),
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            icon: Icon(
+              PhosphorIcons.list,
+              color: Theme.of(context).primaryColor,
+              size: 35,
+            ),
+            onPressed: () {
+              advancedDrawerController.showDrawer();
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 10,
+                      offset: Offset(0, 3),
+                      spreadRadius: 0,
+                    )
+                  ]),
+              child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: AppColors.colorRed),
-                child: Text(
-                  cartcount.toString(),
-                  style: Theme.of(context).primaryTextTheme.bodyMedium,
-                ),
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                child: Row(children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: AppColors.colorRed),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        99.toString(),
+                        style: context.bodySmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    PhosphorIcons.shopping_cart_simple_fill,
+                    color: Theme.of(context).primaryColor,
+                    size: 28,
+                  )
+                ]),
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              SvgPicture.asset(
-                Assets.images.saleImage.cart,
-                height: 25,
-              )
-            ]),
-          )
-        ],
-      ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

@@ -1,10 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:malispos/app/module/bottom_naivigaton/view/widget/custom_drawer.dart';
+import 'package:malispos/app/core/utils/helper/app_helper.dart';
+import 'package:malispos/app/module/bottom_navigation_bar/view/widget/custom_drawer.dart';
 
-import '../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
 import 'widget/custom_itembar.dart';
 import 'widget/itembar_model.dart';
@@ -35,49 +38,52 @@ class BottomNavigation extends StatelessWidget {
           ),
           child: Scaffold(
             // key: scaffoldKey,
-
+            extendBody: true,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.miniCenterDocked,
             resizeToAvoidBottomInset: false,
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {
-                GoRouter.of(context).go('/sales');
-                // GoRouterState.of(context).location.startsWith("/sales");
-              },
-              shape: const CircleBorder(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    Assets.images.addOrder,
-                    color: GoRouterState.of(context).location == "/sales"
-                        ? AppColors.pageBackground
-                        : AppColors.colorUnselect,
+            floatingActionButton: GestureDetector(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: context.primaryColor.withOpacity(.5),
+                    width: 5,
                   ),
-                  Text("Sales",
-                      style: TextStyle(
-                          fontWeight:
-                              GoRouterState.of(context).location == "/sales"
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
-                          fontSize: 10))
-                ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: SvgPicture.asset(
+                    "assets/images/add order.svg",
+                    color: context.primaryColor,
+                    width: 30,
+                    height: 30,
+                  ),
+                ),
               ),
+              onTap: () {
+                GoRouter.of(context).go('/sales');
+              },
             ),
+
             body: child!,
-            bottomNavigationBar: BottomAppBar(
-              // ****** APP BAR ******************
-              // surfaceTintColor: Colors.red,
-              color: Theme.of(context).primaryColor,
-              clipBehavior: Clip.antiAlias,
-              shape: const CircularNotchedRectangle(),
-              notchMargin: 6,
-              padding: const EdgeInsets.all(0),
-              // shadowColor: Colors.transparent,
-              elevation: 10,
-              height: 80,
+            bottomNavigationBar: Container(
+              height: 110,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(.4),
+                        // blurStyle: BlurStyle.outer,
+                        blurRadius: 4,
+                        spreadRadius: 1)
+                  ]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,16 +96,13 @@ class BottomNavigation extends StatelessWidget {
                                 left: e.key == 2 ? 30 : 0,
                                 right: e.key == 1 ? 30 : 0),
                             child: ItemBar(
-                              activeAssetPath: e.value.activeImagePath!,
+                              activeIcon: e.value.activeIcon!,
+                              icon: e.value.icon!,
                               onTap: () {
-                                // Get.put(BottomNavigationBarController())
-                                //     .currentIndex
-                                //     .value = e.key;
                                 _onItemTapped(e.key, context);
                               },
                               currentIndex: e.key,
                               onTapIndex: _calculateSelectedIndex(context),
-                              assetPath: e.value.imagePath!,
                               label: e.value.label!,
                             ),
                           ))
@@ -116,24 +119,24 @@ class BottomNavigation extends StatelessWidget {
 
 final listItem = <ItemModel>[
   ItemModel(
-    imagePath: Assets.images.home,
-    activeImagePath: Assets.images.home,
+    icon: PhosphorIcons.house,
+    activeIcon: PhosphorIcons.house_fill,
     label: "Home",
   ),
   ItemModel(
-    imagePath: Assets.images.product,
-    activeImagePath: Assets.images.product,
-    label: "Products",
+    icon: PhosphorIcons.stack,
+    activeIcon: PhosphorIcons.stack_fill,
+    label: "Product",
   ),
   ItemModel(
-    imagePath: Assets.images.report,
-    activeImagePath: Assets.images.report,
-    label: "Reports",
+    icon: PhosphorIcons.bell,
+    activeIcon: PhosphorIcons.bell_fill,
+    label: "Notification",
   ),
   ItemModel(
-    imagePath: Assets.images.notificaiton,
-    activeImagePath: Assets.images.notificaiton,
-    label: "Notificaiton",
+    icon: PhosphorIcons.files,
+    activeIcon: PhosphorIcons.files_fill,
+    label: "Report",
   ),
 ];
 
@@ -148,12 +151,13 @@ int _calculateSelectedIndex(BuildContext context) {
   if (location.startsWith('/products')) {
     return 1;
   }
-  if (location.startsWith('/reports')) {
+  if (location.startsWith('/notifications')) {
     return 2;
   }
-  if (location.startsWith('/notifications')) {
+  if (location.startsWith('/reports')) {
     return 3;
   }
+
   return 4;
 }
 
@@ -166,10 +170,11 @@ void _onItemTapped(int index, BuildContext context) {
       GoRouter.of(context).go('/products');
       break;
     case 2:
-      GoRouter.of(context).go('/reports');
+      GoRouter.of(context).go('/notifications');
+
       break;
     case 3:
-      GoRouter.of(context).go('/notifications');
+      GoRouter.of(context).go('/reports');
       break;
   }
 }
