@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/state_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/app/module/bottom_navigation_bar/view/widget/custom_drawer.dart';
 
 import '../../../core/values/app_colors.dart';
+import '../controller/bottom_nav_controller.dart';
 import 'widget/custom_itembar.dart';
 import 'widget/itembar_model.dart';
 
 final advancedDrawerController = AdvancedDrawerController();
 
-class BottomNavigation extends StatelessWidget {
+class BottomNavigation extends GetView<BottomNavigationBarController> {
   const BottomNavigation({super.key, this.child});
   final Widget? child;
 
@@ -30,84 +32,95 @@ class BottomNavigation extends StatelessWidget {
           animationDuration: const Duration(milliseconds: 300),
           animateChildDecoration: true,
           rtlOpening: false,
-          // openScale: 0.9,
-          openRatio: 0.7,
+          openRatio: .6,
           disabledGestures: true,
           childDecoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
           child: Scaffold(
-            // key: scaffoldKey,
             extendBody: true,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.miniCenterDocked,
             resizeToAvoidBottomInset: false,
-            floatingActionButton: GestureDetector(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: context.primaryColor.withOpacity(.5),
-                    width: 5,
+            floatingActionButton: GetBuilder(
+              id: "hide-bottom-nav",
+              init: controller,
+              builder: (con) => Visibility(
+                visible: !con.hideBottomNavigationBar,
+                child: GestureDetector(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: context.primaryColor.withOpacity(.5),
+                        width: 5,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: SvgPicture.asset(
+                        "assets/images/add order.svg",
+                        color: context.primaryColor,
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: SvgPicture.asset(
-                    "assets/images/add order.svg",
-                    color: context.primaryColor,
-                    width: 30,
-                    height: 30,
-                  ),
+                  onTap: () {
+                    GoRouter.of(context).go('/sales');
+                  },
                 ),
               ),
-              onTap: () {
-                GoRouter.of(context).go('/sales');
-              },
             ),
-
             body: child!,
-            bottomNavigationBar: Container(
-              height: 110,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+            bottomNavigationBar: GetBuilder(
+              id: "hide-bottom-nav",
+              init: controller,
+              builder: (con) => Visibility(
+                visible: !con.hideBottomNavigationBar,
+                child: Container(
+                  height: 110,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(.4),
+                            // blurStyle: BlurStyle.outer,
+                            blurRadius: 4,
+                            spreadRadius: 1)
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...listItem
+                          .asMap()
+                          .entries
+                          .map((e) => Padding(
+                                padding: EdgeInsets.only(
+                                    left: e.key == 2 ? 30 : 0,
+                                    right: e.key == 1 ? 30 : 0),
+                                child: ItemBar(
+                                  activeIcon: e.value.activeIcon!,
+                                  icon: e.value.icon!,
+                                  onTap: () {
+                                    _onItemTapped(e.key, context);
+                                  },
+                                  currentIndex: e.key,
+                                  onTapIndex: _calculateSelectedIndex(context),
+                                  label: e.value.label!,
+                                ),
+                              ))
+                          .toList()
+                    ],
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(.4),
-                        // blurStyle: BlurStyle.outer,
-                        blurRadius: 4,
-                        spreadRadius: 1)
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...listItem
-                      .asMap()
-                      .entries
-                      .map((e) => Padding(
-                            padding: EdgeInsets.only(
-                                left: e.key == 2 ? 30 : 0,
-                                right: e.key == 1 ? 30 : 0),
-                            child: ItemBar(
-                              activeIcon: e.value.activeIcon!,
-                              icon: e.value.icon!,
-                              onTap: () {
-                                _onItemTapped(e.key, context);
-                              },
-                              currentIndex: e.key,
-                              onTapIndex: _calculateSelectedIndex(context),
-                              label: e.value.label!,
-                            ),
-                          ))
-                      .toList()
-                ],
+                ),
               ),
             ),
           ),
@@ -144,7 +157,6 @@ enum BottomName { home, product, reports, notificaiton }
 
 int _calculateSelectedIndex(BuildContext context) {
   final String location = GoRouterState.of(context).location;
-  debugPrint("location==$location");
   if (location == ('/home')) {
     return 0;
   }

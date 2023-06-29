@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/core/utils/helper/app_helper.dart';
 import 'package:malispos/app/module/product/controller/product_controller.dart';
@@ -30,7 +31,7 @@ class ScanPage extends StatelessWidget {
                 ontap: () {
                   final location = GoRouter.of(context).location;
                   context.push("$location/makepayment", extra: {
-                    'prductlist': SaleController.instance.listSellProduct
+                    'prductlist': Get.put(SaleController()).listSellProduct
                   });
                 },
               )

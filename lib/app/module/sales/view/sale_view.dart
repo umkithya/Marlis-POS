@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -13,141 +14,153 @@ import '../../product/model/product_model.dart';
 import '../controller/sale_controller.dart';
 import '../model/sale_model.dart';
 
-class SaleView extends StatelessWidget {
+class SaleView extends GetView<SaleController> {
   const SaleView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SaleController.instance.obx(
-            (state) => SafeArea(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        header(context, 1),
-                        searchBlock(context),
-                        categoryBlock(state!.listCategory ?? []),
-                        productListBlock(state.listProduct ?? [])
-                      ]),
-                ),
-            onEmpty: const Text("data is empty"),
-            onLoading: const Center(
-              child: CircularProgressIndicator(),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: controller.obx(
+          (state) => SafeArea(
+            bottom: false,
+            child: SingleChildScrollView(
+              controller: controller.scrollController,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    header(context, 9),
+                    searchBlock(context),
+                    categoryBlock(state!.listCategory ?? []),
+                    productListBlock(state.listProduct ?? [])
+                  ]),
             ),
-            onError: (e) => const Text("data is error")));
+          ),
+          onEmpty: const Text("data is empty"),
+          onLoading: const Center(
+            child: CircularProgressIndicator(),
+          ),
+          onError: (e) => const Text("data is error"),
+        ),
+      ),
+    );
   }
 
-  Widget productListBlock(List<ProductListModel> list) => Expanded(
-        child: Container(
-          height: double.infinity,
-          padding: const EdgeInsets.only(top: 36),
-          child: GridView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: list.length,
-              primary: true,
-              shrinkWrap: true,
-              addAutomaticKeepAlives: true,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 20,
-                crossAxisCount: 2,
-                // childAspectRatio: MediaQuery.of(context).size.width /
-                //     (MediaQuery.of(context).size.height / 1.5)),
-              ),
-              itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                    child: Column(children: [
-                      Expanded(
-                          child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                          color: AppColors.colorLightWhite,
-                        ),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Image.asset(
-                          list[index].imageProduct!,
-                          fit: BoxFit.contain,
-                        ),
-                      )),
-                      Expanded(
+  Widget productListBlock(List<ProductListModel> list) => Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: GridView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: list.length,
+            primary: true,
+            shrinkWrap: true,
+            addAutomaticKeepAlives: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 20,
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (context, index) => Container(
+                  decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x3F000000),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                          spreadRadius: -2,
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white),
+                  child: Column(children: [
+                    Expanded(
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(list[index].nameProduct!,
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .labelMedium!),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text("120ml",
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .labelSmall!),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          list[index].type ==
-                                                  ProductStockType.outofstock
-                                              ? Assets
-                                                  .images.saleImage.unavailable
-                                              : Assets
-                                                  .images.saleImage.available,
-                                          height: 15,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        color: AppColors.colorLightWhite,
+                      ),
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.asset(
+                        list[index].imageProduct!,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(list[index].nameProduct!,
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .labelMedium!),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text("120ml",
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .labelSmall!),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
                                         list[index].type ==
                                                 ProductStockType.outofstock
-                                            ? Text("Unavailable",
-                                                style: Theme.of(context)
-                                                    .primaryTextTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        color: AppColors
-                                                            .statusOrange))
-                                            : Text("Available",
-                                                style: Theme.of(context)
-                                                    .primaryTextTheme
-                                                    .labelSmall!
-                                                    .copyWith(
-                                                        color: AppColors
-                                                            .colorGreen))
-                                      ],
-                                    ),
-                                    Text("\$${list[index].price}",
-                                        style: Theme.of(context)
-                                            .primaryTextTheme
-                                            .labelLarge!)
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                            ? Assets
+                                                .images.saleImage.unavailable
+                                            : Assets.images.saleImage.available,
+                                        height: 15,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      list[index].type ==
+                                              ProductStockType.outofstock
+                                          ? Text("Unavailable",
+                                              style: Theme.of(context)
+                                                  .primaryTextTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: AppColors
+                                                          .statusOrange))
+                                          : Text("Available",
+                                              style: Theme.of(context)
+                                                  .primaryTextTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.colorGreen))
+                                    ],
+                                  ),
+                                  Text("\$${list[index].price}",
+                                      style: Theme.of(context)
+                                          .primaryTextTheme
+                                          .labelLarge!)
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ]),
-                  )),
-        ),
+                      ),
+                    )
+                  ]),
+                )),
       );
 
-  SizedBox categoryBlock(List<Category> list) {
+  Widget categoryBlock(List<Category> list) {
     return SizedBox(
       height: 45,
       // width: 59,
@@ -193,7 +206,7 @@ class SaleView extends StatelessWidget {
     );
   }
 
-  Padding searchBlock(BuildContext context) {
+  Widget searchBlock(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Row(
@@ -241,7 +254,7 @@ class SaleView extends StatelessWidget {
     );
   }
 
-  Widget header(BuildContext context, int? cartcount) {
+  Widget header(BuildContext context, int cartcount) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -257,10 +270,9 @@ class SaleView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: IconButton(
-            icon: Icon(
-              PhosphorIcons.list,
-              color: Theme.of(context).primaryColor,
-              size: 35,
+            icon: SvgPicture.asset(
+              Assets.images.saleImage.menu,
+              height: 35,
             ),
             onPressed: () {
               advancedDrawerController.showDrawer();
@@ -292,9 +304,11 @@ class SaleView extends StatelessWidget {
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: AppColors.colorRed),
                     child: Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding: EdgeInsets.all(
+                        cartcount >= 10 ? 8 : 10,
+                      ),
                       child: Text(
-                        99.toString(),
+                        cartcount.toString(),
                         style: context.bodySmall,
                       ),
                     ),

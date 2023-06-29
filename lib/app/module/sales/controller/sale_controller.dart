@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:malispos/app/module/bottom_navigation_bar/controller/bottom_nav_controller.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../product/model/product_model.dart';
 import '../../product/widget/product_card.dart';
@@ -7,14 +9,36 @@ import '../model/sale_model.dart';
 import '../repository/sale_repo.dart';
 
 class SaleController extends GetxController with StateMixin<SaleModel> {
-  SaleController._();
-  static final instance = SaleController._();
-  factory SaleController() => instance;
   final saleRepo = SaleRepo();
   final listSellProduct = <CartModel>[].obs;
+  // final isVisible = true.obs;
+
+  ScrollController scrollController = ScrollController();
+  void _scrollListener() {
+    if (scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      // Scrolling down
+
+      Get.find<BottomNavigationBarController>().hideBottomNavigationBar = true;
+      Get.find<BottomNavigationBarController>().update(["hide-bottom-nav"]);
+    } else if (scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      Get.find<BottomNavigationBarController>().hideBottomNavigationBar = false;
+      Get.find<BottomNavigationBarController>().update(["hide-bottom-nav"]);
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   void onInit() {
     debugPrint("onInit sale controller");
+    scrollController.addListener(_scrollListener);
     fetchSaleData();
     listSellProduct.addAll([
       CartModel(
