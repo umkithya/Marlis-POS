@@ -45,82 +45,101 @@ class BottomNavigation extends GetView<BottomNavigationBarController> {
             floatingActionButton: GetBuilder(
               id: "hide-bottom-nav",
               init: controller,
-              builder: (con) => Visibility(
-                visible: !con.hideBottomNavigationBar,
-                child: GestureDetector(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: context.primaryColor.withOpacity(.5),
-                        width: 5,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: SvgPicture.asset(
-                        "assets/images/add order.svg",
-                        color: context.primaryColor,
-                        width: 30,
-                        height: 30,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    GoRouter.of(context).go('/sales');
-                  },
+              builder: (con) => AnimatedSwitcher(
+                transitionBuilder: (child, animation) => SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, 1.5),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: child,
                 ),
+                duration: const Duration(milliseconds: 500),
+                child: con.hideBottomNavigationBar
+                    ? const SizedBox()
+                    : GestureDetector(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: context.primaryColor.withOpacity(.5),
+                              width: 5,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: SvgPicture.asset(
+                              "assets/images/add order.svg",
+                              color: context.primaryColor,
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          GoRouter.of(context).go('/sales');
+                        },
+                      ),
               ),
             ),
             body: child!,
             bottomNavigationBar: GetBuilder(
               id: "hide-bottom-nav",
               init: controller,
-              builder: (con) => Visibility(
-                visible: !con.hideBottomNavigationBar,
-                child: Container(
-                  height: 110,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(.4),
-                            // blurStyle: BlurStyle.outer,
-                            blurRadius: 4,
-                            spreadRadius: 1)
-                      ]),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...listItem
-                          .asMap()
-                          .entries
-                          .map((e) => Padding(
-                                padding: EdgeInsets.only(
-                                    left: e.key == 2 ? 30 : 0,
-                                    right: e.key == 1 ? 30 : 0),
-                                child: ItemBar(
-                                  activeIcon: e.value.activeIcon!,
-                                  icon: e.value.icon!,
-                                  onTap: () {
-                                    _onItemTapped(e.key, context);
-                                  },
-                                  currentIndex: e.key,
-                                  onTapIndex: _calculateSelectedIndex(context),
-                                  label: e.value.label!,
-                                ),
-                              ))
-                          .toList()
-                    ],
-                  ),
+              builder: (con) => AnimatedSwitcher(
+                transitionBuilder: (child, animation) => SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, 1),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: child,
                 ),
+                duration: const Duration(milliseconds: 500),
+                child: con.hideBottomNavigationBar
+                    ? const SizedBox()
+                    : Container(
+                        height: 110,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(.4),
+                                  // blurStyle: BlurStyle.outer,
+                                  blurRadius: 4,
+                                  spreadRadius: 1)
+                            ]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...listItem
+                                .asMap()
+                                .entries
+                                .map((e) => Padding(
+                                      padding: EdgeInsets.only(
+                                          left: e.key == 2 ? 30 : 0,
+                                          right: e.key == 1 ? 30 : 0),
+                                      child: ItemBar(
+                                        activeIcon: e.value.activeIcon!,
+                                        icon: e.value.icon!,
+                                        onTap: () {
+                                          _onItemTapped(e.key, context);
+                                        },
+                                        currentIndex: e.key,
+                                        onTapIndex:
+                                            _calculateSelectedIndex(context),
+                                        label: e.value.label!,
+                                      ),
+                                    ))
+                                .toList()
+                          ],
+                        ),
+                      ),
               ),
             ),
           ),
