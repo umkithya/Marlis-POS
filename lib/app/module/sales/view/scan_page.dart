@@ -3,11 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/core/utils/helper/app_helper.dart';
-import 'package:malispos/app/module/product/controller/product_controller.dart';
 import 'package:malispos/app/module/sales/controller/sale_controller.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../core/values/app_colors.dart';
+import '../model/sale_model.dart';
+import '../widget/custom_aleart_dailog.dart';
 import '../widget/custom_button_make_payment.dart';
 import '../widget/custom_card_sale.dart';
 
@@ -22,13 +23,20 @@ class ScanPage extends StatelessWidget {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Column(
+            child: GetBuilder(
+          init: SaleController(),
+          builder: (_) => Column(
             children: [
               header(context, 2),
               scanBlock(),
-              Expanded(child: cardBlock()),
+              Expanded(
+                  child: cardBlock(SaleController.instance.listSellProduct)),
               CustomButtonMakePayment(
+                isdisableButton:
+                    SaleController.instance.listSellProduct.isEmpty,
                 ontap: () {
+                  print(
+                      "lengt ${SaleController.instance.listSellProduct.length}");
                   final location = GoRouter.of(context).location;
                   context.push("$location/makepayment", extra: {
                     'prductlist': Get.put(SaleController()).listSellProduct
@@ -37,25 +45,50 @@ class ScanPage extends StatelessWidget {
               )
             ],
           ),
-        ),
+        )),
       ),
     );
   }
 
-  Padding cardBlock() => Padding(
+  Widget cardBlock(List<CartModel> cardlist) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView.separated(
             shrinkWrap: true,
-            itemCount: ProductController.instance.productListTest.length,
+            itemCount: cardlist.length,
             separatorBuilder: (context, index) => 10.sh,
             itemBuilder: (context, index) => CustomCardSale(
-                  imagePath: ProductController
-                      .instance.productListTest[index].imageProduct,
-                  nameProduct: ProductController
-                      .instance.productListTest[index].nameProduct,
-                  type: ProductController.instance.productListTest[index].type,
-                  price: ProductController.instance.productListTest[index].price
-                      .toString(),
+                  ontapDecrea: () {
+                    debugPrint("qty decrea ${cardlist[index].qty}");
+                    cardlist[index].qty = cardlist[index].qty! - 1;
+                    if (cardlist[index].qty == 0) {
+                      cardlist.remove(cardlist[index]);
+                    }
+                    SaleController.instance.update();
+                  },
+                  ontapDelete: () {
+                    customShowAboutDialog(
+                        context,
+                        "Are you sure you want to remove this ${cardlist[index].productList!.nameProduct}",
+                        "", () {
+                      //yes button
+                      cardlist.remove(cardlist[index]);
+                      SaleController.instance.update();
+
+                      Navigator.pop(context);
+                    }, () {
+                      //No button
+                      Navigator.pop(context);
+                    });
+                  },
+                  ontapIncrea: () {
+                    cardlist[index].qty = cardlist[index].qty! + 1;
+                    SaleController.instance.update();
+                  },
+                  num: cardlist[index].qty,
+                  imagePath: cardlist[index].productList!.imageProduct,
+                  nameProduct: cardlist[index].productList!.nameProduct,
+                  type: cardlist[index].productList!.type,
+                  price: cardlist[index].productList!.price.toString(),
                 )),
       );
 

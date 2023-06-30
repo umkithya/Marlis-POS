@@ -1,5 +1,4 @@
 import 'package:binding_router/binding_router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:malispos/app/module/home/Binding/home_binding.dart';
@@ -19,6 +18,7 @@ import '../module/sales/binding/sale_binding.dart';
 import '../module/sales/binding/scan_binding.dart';
 import '../module/sales/controller/sale_controller.dart';
 import '../module/sales/controller/scan_controller.dart';
+import '../module/sales/model/sale_model.dart';
 import '../module/sales/view/make_payment_screen.dart';
 import '../module/sales/view/sale_view.dart';
 import '../module/sales/view/scan_page.dart';
@@ -84,7 +84,7 @@ class AppRoute {
                                 state.extra as Map<String, dynamic>;
                             return MakePaymentScreen(
                               listProduct:
-                                  listproduct['prductlist'] as List<Category>,
+                                  listproduct['prductlist'] as List<CartModel>,
                             );
                           }),
                     ]),

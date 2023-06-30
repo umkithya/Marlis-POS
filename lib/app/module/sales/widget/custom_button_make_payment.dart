@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomButtonMakePayment extends StatelessWidget {
   final Function? ontap;
-  const CustomButtonMakePayment({super.key, this.ontap});
+  final bool? isdisableButton;
+  const CustomButtonMakePayment(
+      {super.key, this.ontap, this.isdisableButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,11 @@ class CustomButtonMakePayment extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             shape: const StadiumBorder(),
           ),
-          onPressed: () {
-            ontap!();
-          },
+          onPressed: isdisableButton!
+              ? null
+              : () {
+                  ontap!();
+                },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

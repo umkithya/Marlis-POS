@@ -121,7 +121,11 @@ class CustomCardSale extends StatelessWidget {
                     ),
                     child: Row(children: [
                       GestureDetector(
-                        onTap: () => ontapDecrea,
+                        onTap: num! <= 0
+                            ? null
+                            : () {
+                                ontapDecrea!();
+                              },
                         child: SvgPicture.asset(
                             Assets.images.saleImage.decreaseicon,
                             color: num! > 0
@@ -133,10 +137,14 @@ class CustomCardSale extends StatelessWidget {
                         child: Text(num.toString()),
                       ),
                       GestureDetector(
-                          onTap: () => ontapIncrea,
+                          onTap: num! >= 99
+                              ? null
+                              : () {
+                                  ontapIncrea!();
+                                },
                           child: SvgPicture.asset(
                             Assets.images.saleImage.increaseicon,
-                            color: num! <= 99
+                            color: num! < 99
                                 ? Theme.of(context).primaryColor
                                 : AppColors.colorTextGrey,
                           ))
@@ -147,15 +155,20 @@ class CustomCardSale extends StatelessWidget {
             ),
           ),
           10.sW,
-          Container(
-            // margin: const EdgeInsets.only(left: 8),
-            // height: max.maxHeight,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              ontapDelete!();
+            },
+            child: Container(
+              // margin: const EdgeInsets.only(left: 8),
+              // height: max.maxHeight,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              child: SvgPicture.asset(Assets.images.saleImage.deleteIcon),
             ),
-            child: SvgPicture.asset(Assets.images.saleImage.deleteIcon),
           )
         ],
       ),

@@ -48,7 +48,7 @@ class SaleController extends GetxController with StateMixin<SaleModel> {
               buy: 120,
               sell: 110,
               price: 2500,
-              type: ProductStockType.low),
+              type: ProductStockType.outofstock),
           qty: 3),
       CartModel(
           productList: ProductListModel(
@@ -66,7 +66,7 @@ class SaleController extends GetxController with StateMixin<SaleModel> {
               sell: 420,
               price: 2000,
               imageProduct: Assets.images.productPng.melon.path,
-              type: ProductStockType.outofstock),
+              type: ProductStockType.low),
           qty: 6),
     ]);
     super.onInit();
