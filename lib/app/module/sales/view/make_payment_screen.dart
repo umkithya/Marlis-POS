@@ -29,18 +29,23 @@ class MakePaymentScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AddCustomerBlock(
-            ontapPrint: () {},
-            id: '#INV001',
-            ontapAddCustomer: () {},
-            ontapmore: () {},
-            listProduct: listProduct,
-          ),
-          const ConfirmPaymentCard()
-        ],
+      body: GestureDetector(
+        onPanDown: (d) {
+          FocusScope.of(context).unfocus();
+        },
+        child: Stack(
+          children: [
+            AddCustomerBlock(
+              ontapPrint: () {},
+              id: '#INV001',
+              ontapAddCustomer: () {},
+              ontapmore: () {},
+              listProduct: listProduct,
+            ),
+            const Positioned(
+                bottom: 0, left: 0, right: 0, child: ConfirmPaymentCard())
+          ],
+        ),
       ),
     );
   }

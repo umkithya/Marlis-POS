@@ -12,8 +12,13 @@ class SaleController extends GetxController with StateMixin<SaleModel> {
   final saleRepo = SaleRepo();
   final listSellProduct = <CartModel>[].obs;
   // final isVisible = true.obs;
-
+  SaleController._();
+  static final instance = SaleController._();
+  factory SaleController() => instance;
   ScrollController scrollController = ScrollController();
+  //Cash or ABA or Other bank
+  final selectPayment = ''.obs;
+
   void _scrollListener() {
     if (scrollController.position.userScrollDirection ==
         ScrollDirection.reverse) {
@@ -59,6 +64,33 @@ class SaleController extends GetxController with StateMixin<SaleModel> {
             sell: 30,
           ),
           qty: 3),
+      CartModel(
+          productList: ProductListModel(
+              nameProduct: 'Water Lemon',
+              buy: 420,
+              sell: 420,
+              price: 2000,
+              imageProduct: Assets.images.productPng.melon.path,
+              type: ProductStockType.low),
+          qty: 6),
+      CartModel(
+          productList: ProductListModel(
+              nameProduct: 'Water Lemon',
+              buy: 420,
+              sell: 420,
+              price: 2000,
+              imageProduct: Assets.images.productPng.melon.path,
+              type: ProductStockType.low),
+          qty: 6),
+      CartModel(
+          productList: ProductListModel(
+              nameProduct: 'Water Lemon',
+              buy: 420,
+              sell: 420,
+              price: 2000,
+              imageProduct: Assets.images.productPng.melon.path,
+              type: ProductStockType.low),
+          qty: 6),
       CartModel(
           productList: ProductListModel(
               nameProduct: 'Water Lemon',

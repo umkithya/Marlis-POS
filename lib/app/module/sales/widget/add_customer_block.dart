@@ -92,9 +92,11 @@ class AddCustomerBlock extends StatelessWidget {
           ),
         ),
         20.sh,
-        ...listProduct!
-            .map(
-              (e) => Container(
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: listProduct!.length,
+            itemBuilder: (context, index) {
+              return Container(
                 color: Colors.white,
                 child: Column(
                   children: [
@@ -104,17 +106,17 @@ class AddCustomerBlock extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          e.productList!.nameProduct!,
+                          listProduct![index].productList!.nameProduct!,
                           style: context.labelLarge,
                         ),
                         Column(
                           children: [
                             Text(
-                              "${e.productList!.price}\$",
+                              "${listProduct![index].productList!.price}\$",
                               style: context.labelLarge,
                             ),
                             Text(
-                              "Qty: ${e.qty}",
+                              "Qty: ${listProduct![index].qty}",
                               style: context.titleMedium,
                             )
                           ],
@@ -128,9 +130,8 @@ class AddCustomerBlock extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-            )
-            .toList()
+              );
+            })
       ]),
     );
   }
